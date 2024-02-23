@@ -1,5 +1,5 @@
 # Node.js
-node_modules/
+node_modules
 
 # Development logs
 logs/
