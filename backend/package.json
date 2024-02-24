@@ -2,9 +2,11 @@
   "name": "dahlia-1",
   "version": "1.0.0",
   "description": "parking app",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "test_run"
+    "test": "test_run",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,7 @@
     "real time parking",
     "service app"
   ],
-  "author": "CJ, Jay, and Hamda",
+  "author": "CJ, Jay, DevKoko, and Hamda",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Project-Dahlia/Dahlia/issues"
