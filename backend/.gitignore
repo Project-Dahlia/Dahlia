@@ -25,7 +25,4 @@ coverage/
 
 # Miscellaneous
 *.log
-*.env.local
-.env.test
-.env.development.local
-.env.test.local
+*.env
