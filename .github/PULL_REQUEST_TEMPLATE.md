@@ -11,7 +11,6 @@ Briefly describe the purpose of this pull request.
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)\
 - [ ] Refactoring (no functional changes, no api changes)
 - [ ] Documentation content changes
-- [ ] Tests have been added or updated (if applicable).
 
 ### Issue ticket number and link
 
