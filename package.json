@@ -1,0 +1,20 @@
+{
+  "name": "dahlia",
+  "version": "0.0.1",
+  "description": "On-demand parking app for everyday use",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Project-Dahlia/Dahlia.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Project-Dahlia/Dahlia/issues"
+  },
+  "homepage": "https://github.com/Project-Dahlia/Dahlia#readme",
+  "devDependencies": {
+    "husky": "^9.0.11"
+  }
+}
