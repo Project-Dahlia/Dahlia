@@ -1,1 +1,10 @@
-echo "Husky pre-commit"
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Check changed files between frontend and backend
+
+# If frontend has no changes, no need to run frontend lint-staged
+if [ -n "$(git status frontend --porcelain --untracked-files=no)" ]; then
+  cd frontend
+  npx lint-staged
+fi
