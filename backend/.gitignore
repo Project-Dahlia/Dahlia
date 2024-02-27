@@ -1,0 +1,28 @@
+# dependencies
+node_modules
+# Development logs
+logs/
+
+# dotenv environment variables file
+*.env
+!.env.example
+
+# Mac files
+.DS_Store
+
+# Windows files
+Thumbs.db
+
+# Production build
+build/
+dist/
+
+# IDE and editor files
+.idea/
+.vscode/
+
+# Test coverage reports
+coverage/
+
+# Miscellaneous
+*.log
