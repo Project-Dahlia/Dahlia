@@ -4,8 +4,12 @@ node_modules
 # Development logs
 logs/
 
+# Miscellaneous
+*.log
+*.env
+
 # dotenv environment variables file
-.env
+!.env.example
 
 # Mac files
 .DS_Store
@@ -23,7 +27,3 @@ dist/
 
 # Test coverage reports
 coverage/
-
-# Miscellaneous
-*.log
-*.env
