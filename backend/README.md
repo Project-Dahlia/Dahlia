@@ -8,7 +8,3 @@ Node.js:
 Firebase:
 
 - npm install firebase-admin
-
-run program:
-
-"node <fileName>"
