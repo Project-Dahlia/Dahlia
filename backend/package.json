@@ -9,6 +9,9 @@
     "test": "jest --verbose --runInBand",
     "test:watch": "jest --watch"
   },
+  "lint-staged": {
+    "*": "echo 'lint-staged backend'"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Project-Dahlia/Dahlia.git"
@@ -34,6 +37,7 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "lint-staged": "^15.2.2",
     "nodemon": "^3.1.0",
     "supertest": "^6.3.4"
   },
