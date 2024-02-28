@@ -7,11 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier --write . --plugin prettier-plugin-tailwindcss .",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "lint-staged": {
-    "*": "echo 'lint-staged frontend'"
+    "*.{js,ts,tsx,json}": [
+      "prettier --write --ignore-unknown"
+    ],
+    "*.{tsx,css,html}": [
+      "prettier --write --ignore-unknown --plugin prettier-plugin-tailwindcss"
+    ]
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
@@ -41,6 +47,8 @@
     "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^15.2.2",
     "postcss": "^8",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.3.0",
     "ts-jest": "^29.1.2",
     "typescript": "^5"
