@@ -7,12 +7,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier --write . --plugin prettier-plugin-tailwindcss .",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "lint-staged": {
     "*.{js,ts,tsx,json}": [
       "prettier --write --ignore-unknown"
+    ],
+    "*.{css,html}": [
+      "prettier --write --ignore-unknown --plugin prettier-plugin-tailwindcss"
     ]
   },
   "dependencies": {
@@ -44,6 +48,7 @@
     "lint-staged": "^15.2.2",
     "postcss": "^8",
     "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.3.0",
     "ts-jest": "^29.1.2",
     "typescript": "^5"
