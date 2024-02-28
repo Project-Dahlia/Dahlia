@@ -15,7 +15,7 @@
     "*.{js,ts,tsx,json}": [
       "prettier --write --ignore-unknown"
     ],
-    "*.{css,html}": [
+    "*.{tsx,css,html}": [
       "prettier --write --ignore-unknown --plugin prettier-plugin-tailwindcss"
     ]
   },
