@@ -11,7 +11,8 @@
     "next/babel",
     "next/core-web-vitals",
     "plugin:testing-library/react",
-    "plugin:jest-dom/recommended"
+    "plugin:jest-dom/recommended",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": { 
