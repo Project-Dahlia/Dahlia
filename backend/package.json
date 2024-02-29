@@ -7,8 +7,8 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "lint": "eslint {*.js,json}",
-    "lint:fix": "eslint --fix {*.js.json}",
-    "format": "prettier --write {*.js,json}",
+    "lint:fix": "eslint --fix {*.js,json}",
+    "format": "prettier --write .",
     "test": "jest --verbose --runInBand",
     "test:watch": "jest --watch"
   },
