@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write . --plugin prettier-plugin-tailwindcss .",
+    "lint": "next lint && prettier --check . && eslint .",
+    "format": "eslint --fix . && prettier --write . --plugin prettier-plugin-tailwindcss .",
     "test": "jest",
     "test:watch": "jest --watch"
   },
