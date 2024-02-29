@@ -6,13 +6,13 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "lint": "eslint ./*.js",
-    "lint:fix": "eslint --fix ./*.js",
+    "lint": "eslint {*.js,json}",
+    "lint:fix": "eslint --fix {*.js.json}",
     "test": "jest --verbose --runInBand",
     "test:watch": "jest --watch"
   },
   "lint-staged": {
-    "./*.js": "eslint --fix"
+    "*.{js,json}": "eslint --fix"
   },
   "repository": {
     "type": "git",
