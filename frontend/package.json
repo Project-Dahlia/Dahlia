@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint && prettier --check . && eslint .",
     "format": "eslint --fix . && prettier --write . --plugin prettier-plugin-tailwindcss .",
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "jest --watch"
   },
   "lint-staged": {
