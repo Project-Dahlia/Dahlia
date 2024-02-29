@@ -7,12 +7,16 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "lint": "eslint {*.js,json}",
-    "lint:fix": "eslint --fix {*.js.json}",
+    "lint:fix": "eslint --fix {*.js,json}",
+    "format": "prettier --write .",
     "test": "jest --verbose --runInBand",
     "test:watch": "jest --watch"
   },
   "lint-staged": {
-    "*.{js,json}": "eslint --fix"
+    "*.{js,json}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "repository": {
     "type": "git",
@@ -39,6 +43,7 @@
   },
   "devDependencies": {
     "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.2",
@@ -46,6 +51,7 @@
     "jest": "^29.7.0",
     "lint-staged": "^15.2.2",
     "nodemon": "^3.1.0",
+    "prettier": "^3.2.5",
     "supertest": "^6.3.4"
   },
   "jest": {
