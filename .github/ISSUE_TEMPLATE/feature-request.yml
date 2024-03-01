@@ -1,0 +1,44 @@
+name: 🚀 Feature Request
+description: "Submit a proposal for a new feature"
+title: "🚀 Feature: "
+labels: ["🚀 new feature"]
+body:
+  - type: textarea
+    id: description
+    validations:
+      required: true
+    attributes:
+      label: "✒️ What is your desired feature?"
+      description: "Describe your desired feature clearly and concisely."
+      placeholder: "I would like ..."
+  - type: textarea
+    id: pitch
+    validations:
+      required: true
+    attributes:
+      label: "❔ Why is this feature needed?"
+      description: "Explain why this feature should be implemented and how it would be used. Add examples, if applicable."
+      placeholder: "This feature is needed because ..."
+  - type: textarea
+    id: solution
+    validations:
+      required: true
+    attributes:
+      label: "🏆 How do you aim to achieve this?"
+      description: "Explain the expected behavior of this feature clearly and concisely."
+      placeholder: "I want this feature to ..."
+  - type: textarea
+    id: alternative
+    validations:
+      required: false
+    attributes:
+      label: "🔄 Alternative solutions"
+      description: "Provide any alternative or additional solutions you've considered."
+      placeholder: "I tried ..."
+  - type: checkboxes
+    id: no-duplicate-issues
+    attributes:
+      label: "🔍 Have you checked to see if this feature has been requested before?"
+      options:
+        - label: "I checked and didn't find a similar request"
+          required: true
