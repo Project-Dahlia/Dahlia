@@ -12,7 +12,7 @@ defaults:
     working-directory: "backend/"
 
 jobs:
-  run-frontend-tests:
+  run-backend-tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
