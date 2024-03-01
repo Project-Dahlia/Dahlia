@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
-    "test": "jest --verbose --runInBand",
+    "test": "jest --verbose --runInBand --coverage",
     "test:watch": "jest --watch"
   },
   "lint-staged": {
