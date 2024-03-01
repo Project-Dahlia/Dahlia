@@ -27,5 +27,5 @@ jobs:
           cache: "npm"
       - name: Install dependencies
         run: npm i
-      - name: Lint with Eslint
+      - name: Run linters
         run: npm run lint
