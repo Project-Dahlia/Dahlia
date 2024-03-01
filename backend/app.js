@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
 //Import requirement modules
-const express = require("express");
+const express = require('express');
 const app = express();
 const port = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello Parking User");
+app.get('/', (req, res) => {
+  res.send('Hello Parking User');
 });
 
 // Start the server
