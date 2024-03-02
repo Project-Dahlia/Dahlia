@@ -1,0 +1,52 @@
+name: 🐛 Bug Report
+description: "Submit a bug report to help us improve"
+title: "🐛 Bug: "
+labels: ["🐛 bug"]
+body:
+  - type: textarea
+    id: description
+    validations:
+      required: true
+    attributes:
+      label: "🐞 What is the bug you are experiencing?"
+      description: "Describe the bug clearly and concisely."
+      placeholder: "This feature breaks when ..."
+  - type: textarea
+    id: reproduction-steps
+    validations:
+      required: true
+    attributes:
+      label: "🪜 What are the steps to reproduce this bug?"
+      description: "Walk us through the process, step-by-step, to trigger the bug."
+      placeholder: "1. Go to '...' 2. Click on '...' 3. Scroll to '...' 4. Error is shown"
+  - type: textarea
+    id: expected-behavior
+    validations:
+      required: true
+    attributes:
+      label: "✅ What is the expected behavior?"
+      description: "If this bug does not occur, what do you think should happen?"
+      placeholder: "It should ..."
+  - type: textarea
+    id: actual-behavior
+    validations:
+      required: true
+    attributes:
+      label: "🚫 What is the actual behavior?"
+      description: "Describe what is actually happening. Add screenshots, if applicable."
+      placeholder: "It actually ..."
+  - type: textarea
+    id: additional-info
+    validations:
+      required: false
+    attributes:
+      label: "📃 Additional information"
+      description: "Add any extra information or contexts that may help us narrow down on the source of the bug."
+      placeholder: "Additionally, ..."
+  - type: checkboxes
+    id: no-duplicate-issues
+    attributes:
+      label: "🔍 Have you checked to see if this bug has been reported before?"
+      options:
+        - label: "I checked and didn't find a similar report"
+          required: true
