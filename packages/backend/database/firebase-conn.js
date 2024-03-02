@@ -1,15 +1,15 @@
-"use strict";
+'use strict';
 
-const admin = require("firebase-admin");
+const admin = require('firebase-admin');
 // const serviceKey = require('./serviceKey.json'); // need fb service key
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(serviceAccount)
 });
 
 const firestore = admin.firestore();
 const settings = {
-  timestampsInSnapshots: true,
+  timestampsInSnapshots: true
 };
 firestore.settings(settings);
 

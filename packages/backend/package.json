@@ -1,13 +1,13 @@
 {
-  "name": "dahlia-1",
+  "name": "dahlia-backend",
   "version": "1.0.0",
   "description": "parking app",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint --fix && prettier --write .",
     "format": "prettier --write .",
     "test": "jest --verbose --runInBand --coverage",
     "test:watch": "jest --watch"
