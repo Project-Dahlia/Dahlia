@@ -97,4 +97,4 @@ Filling out the PR template will tell us **what** and **why** you made the chang
 
 ## 🚀 Releases
 
-We are using [`lerna`](https://lerna.js.org/docs/api-reference/commands) to manage our releases, package versioning, and changelogs.
+We use [`lerna`](https://lerna.js.org/docs/api-reference/commands) to manage our releases, package versioning, and changelogs.
