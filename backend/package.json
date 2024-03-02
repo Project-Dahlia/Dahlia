@@ -1,5 +1,5 @@
 {
-  "name": "dahlia-1",
+  "name": "dahlia-backend",
   "version": "1.0.0",
   "description": "parking app",
   "main": "app.js",
