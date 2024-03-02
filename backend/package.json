@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint --fix && prettier --write .",
     "format": "prettier --write .",
     "test": "jest --verbose --runInBand --coverage",
     "test:watch": "jest --watch"
