@@ -13,14 +13,14 @@ WORKDIR /frontend
 # Copy dependencies lock to container
 COPY package.json yarn.lock ./
 
-# Set yarn version
-RUN yarn set version 4.8.1
-
 # Install dependencies
 RUN yarn install
 
 # Copy source files into container
 COPY . .
+
+# Build Next.js app
+RUN yarn build
 
 ENV PORT 3000
 
