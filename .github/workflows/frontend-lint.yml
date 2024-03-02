@@ -3,7 +3,7 @@ name: Frontend Lint
 on:
   push:
     branches: ["dev"]
-    paths: ["/packages/frontend/"]
+    paths: ["./packages/frontend"]
   pull_request:
     branches: ["dev"]
 
