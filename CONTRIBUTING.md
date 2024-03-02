@@ -3,7 +3,7 @@
 ✨ Thank you for taking the time to contribute to Project Dahlia!
 Here are some important processes and guidelines this project follows.
 
-**Disclaimer:** _this guide is currently aimed towards internal developers, but will continue to be updated for outside contributors later on._
+**Disclaimer:** _this guide is for internal developers, but will continue to be updated for outside contributors later on._
 
 ## 📝 Issues
 
