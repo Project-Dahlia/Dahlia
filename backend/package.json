@@ -1,7 +1,6 @@
 {
   "name": "dahlia-backend",
   "version": "1.0.0",
-  "description": "parking app",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -18,26 +17,6 @@
       "prettier --write"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Project-Dahlia/Dahlia.git"
-  },
-  "keywords": [
-    "parking",
-    "concerts",
-    "events",
-    "sports",
-    "theater",
-    "parking app",
-    "real time parking",
-    "service app"
-  ],
-  "author": "CJ, Jay, DevKoko, and Hamda",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Project-Dahlia/Dahlia/issues"
-  },
-  "homepage": "https://github.com/Project-Dahlia/Dahlia#readme",
   "dependencies": {
     "express": "^4.18.2"
   },

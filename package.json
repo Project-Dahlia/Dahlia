@@ -14,6 +14,18 @@
     "url": "https://github.com/Project-Dahlia/Dahlia/issues"
   },
   "homepage": "https://github.com/Project-Dahlia/Dahlia#readme",
+  "keywords": [
+    "parking",
+    "concerts",
+    "events",
+    "sports",
+    "theater",
+    "parking app",
+    "real time parking",
+    "service app"
+  ],
+  "author": "Devhub Team",
+  "license": "ISC",
   "devDependencies": {
     "@commitlint/cli": "^19.0.3",
     "@commitlint/config-conventional": "^19.0.3",
