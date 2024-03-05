@@ -3,13 +3,8 @@ name: Frontend Lint
 on:
   push:
     branches: ["dev"]
-    paths: [./packages/frontend/]
   pull_request:
     branches: ["dev"]
-
-defaults:
-  run:
-    working-directory: ./packages/frontend/
 
 jobs:
   run-frontend-lint:
@@ -26,6 +21,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - name: Install dependencies
+        working-directory: ./packages/frontend/
         run: npm i
       - name: Run linters
+        working-directory: ./packages/frontend/
         run: npm run lint
