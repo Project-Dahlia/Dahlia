@@ -10,7 +10,7 @@ if [ -n "$(git status frontend --porcelain --untracked-files=no)" ]; then
 fi
 
 # If backend has no changes, no need to run backend lint-staged
-if [ -n "$(git status backend --porcelain --untracked-files=no)" ]; then
-  cd backend
+if [ -n "$(git status packages/backend --porcelain --untracked-files=no)" ]; then
+  cd packages/backend
   npx lint-staged
 fi
