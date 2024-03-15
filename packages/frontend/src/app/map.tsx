@@ -33,7 +33,7 @@ class Map {
         //To test in Toronto:
         // console.log(`https://www.google.com/maps/@${latitude},${longitude}?entry=ttu`);
         
-        const coords = [latitude, longitude];
+        const coords: L.LatLngTuple = [latitude, longitude];
         // Sets zoom level and map center
         this.map = L.map('map').setView(coords, this.zoom);
 
