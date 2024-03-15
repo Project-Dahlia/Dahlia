@@ -1,12 +1,12 @@
 'use strict';
 
-import L from 'leaflet';
+import * as L from 'leaflet';
 
 class Map {
-    #map;
-    #zoom =13;
-    #mapEvent;
-    #marker = [];
+    private map: L.Map | undefined;
+    private zoom: number =13;
+    private mapEvent: L.Events | undefined;
+    private marker: L.Marker[] = [];
 
     //get user position when run TODO -- and event?
     constructor() {
@@ -27,7 +27,7 @@ class Map {
         }
     }
 
-    _loadMap(position) {
+    _loadMap(position: GeolocationPosition) {
         const { latitude } = position.coords;
         const { longitude } = position.coords;
         //To test in Toronto:
@@ -35,14 +35,14 @@ class Map {
         
         const coords = [latitude, longitude];
         // Sets zoom level and map center
-        this.#map = L.map('map').setView(coords, this.#zoom);
+        this.map = L.map('map').setView(coords, this.zoom);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
-        }).addTo(this.#map);
+        }).addTo(this.map);
 
         //From Leaflet to click on map
-        this.#map.on('click', this._mapClick.bind(this));
+        this.map.on('click', this._mapClick.bind(this));
 
         //render markers to map now map is loaded:
         // TODO
@@ -56,14 +56,14 @@ class Map {
         //TODO
     }
 
-    _moveToPopup(e){
+    _moveToPopup(e: L.LeafletMouseEvent){
         //TODO
         //move to the clicked popup
         // show form for change route / parking information here -- tbd
         
     }
 
-    _mapClick(e){
+    _mapClick(e: L.LeafletMouseEvent) {
         //TODO
     }
     
