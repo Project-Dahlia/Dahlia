@@ -3,13 +3,13 @@ import { Inter } from 'next/font/google';
 import StoreProvider from './StoreProvider';
 import '@/styles/globals.css';
 import { cn } from '@/lib/utils';
-import { SiteHeader } from '@/components/site-header';
+import { siteConfig } from '@/config/site';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
-  title: 'Dahlia',
-  description: 'Concert Parking App'
+  title: siteConfig.name,
+  description: siteConfig.description
 };
 
 export default function RootLayout({
