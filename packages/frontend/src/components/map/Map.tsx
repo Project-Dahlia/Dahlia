@@ -1,22 +1,34 @@
 import React from 'react';
-import { MapContainer, Marker, TileLayer, Popup } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer, Popup } from 'react-Leaflet';
 
 const position: [number, number] = [51.505, -0.09];
 
-const MyMap: React.FC = () => {
+function MapComponent() {
   return (
-    <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+    <MapContainer
+      style={{
+        height: '100vh',
+        width: '100ww'
+      }}
+      center={[51.505, -0.09]}
+      zoom={13}
+      scrollWheelZoom={false}
+    >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={position}>
+      <Marker position={[51.505, -0.09]}>
         <Popup>
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
       </Marker>
     </MapContainer>
   );
-};
+}
 
-export default MyMap;
+<<<<<<< HEAD
+export default Map;
+=======
+export default MapComponent;
+>>>>>>> 9271f94 (refactor(frontend): fixed naming conv)
