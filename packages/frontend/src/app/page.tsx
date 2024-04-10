@@ -1,5 +1,9 @@
 import Button from '@/components/buttons/Button';
-import MapComponent from '../components/map/Map';
+import dynamic from 'next/dynamic';
+
+const DynamicMap = dynamic(() => import('../components/map/Map'), {
+  ssr: false
+});
 
 export default function Home() {
   return (
@@ -13,7 +17,7 @@ export default function Home() {
         <Button variant="link">Button</Button>
       </div>
       <div>
-        <MapComponent />
+        <DynamicMap />
       </div>
     </main>
   );
