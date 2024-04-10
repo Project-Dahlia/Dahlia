@@ -1,9 +1,9 @@
 import React from 'react';
-import { MapContainer, Marker, TileLayer, Popup } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer, Popup } from 'react-Leaflet';
 
 const position: [number, number] = [51.505, -0.09];
 
-const MyMap: React.FC = () => {
+function MapComponent() {
   return (
     <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
       <TileLayer
@@ -17,6 +17,6 @@ const MyMap: React.FC = () => {
       </Marker>
     </MapContainer>
   );
-};
+}
 
-export default MyMap;
+export default MapComponent;
