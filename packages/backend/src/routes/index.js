@@ -7,6 +7,10 @@ const defaultRoutes = [
   {
     path: '/',
     route: homeRoute
+  },
+  {
+    path: '/test',
+    route: homeRoute
   }
 ];
 
