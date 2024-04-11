@@ -14,7 +14,6 @@ module.exports = {
   ],
   coverageReporters: ['text', 'lcov', 'clover', 'html'],
   globalTeardown: './tests/teardown.js',
-  //   setupFiles: ['dotenv/config'],
-  setupFiles: ['./tests/setupEnvVars.js'],
+  setupFiles: ['dotenv/config'],
   testTimeout: 10000
 };
