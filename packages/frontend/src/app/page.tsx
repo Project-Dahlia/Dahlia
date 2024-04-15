@@ -1,9 +1,9 @@
-import { SiteHeader } from '@/components/site-header';
+import { Header } from '@/components/site-header';
 
 export default function Home() {
   return (
     <main>
-      <SiteHeader />
+      <Header />
     </main>
   );
 }
