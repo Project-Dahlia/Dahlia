@@ -18,7 +18,6 @@ export function Header() {
     >
       <div className="container flex items-center justify-between">
         <MainNav />
-        {/* <div className="flex flex-1 justify-end border border-purple-600"> */}
         <nav className="mx-4 flex items-center gap-6 py-2">
           {showLoginButton && (
             <Button
@@ -43,7 +42,6 @@ export function Header() {
             </Button>
           )}
         </nav>
-        {/* </div> */}
       </div>
     </header>
   );
