@@ -28,7 +28,7 @@ export default function Login() {
             </p>
           </div>
           <UserAuthForm />
-          <div className="login-actions text-md flex flex-col gap-3 text-center text-muted-foreground">
+          <div className="login-actions flex flex-col gap-4 text-center text-sm text-muted-foreground">
             <span className="px-5">
               Don&apos;t have an account? Click here to{' '}
               <Link
