@@ -1,5 +1,4 @@
 import localFont from 'next/font/local';
-import { Inter } from 'next/font/google';
 
 export const fontHeading = localFont({
   src: './Adamina-Regular.ttf',
@@ -11,7 +10,7 @@ export const fontSubheading = localFont({
   variable: '--font-subheading'
 });
 
-export const inter = Inter({
-  subsets: ['latin'],
+export const inter = localFont({
+  src: './Inter-Regular.ttf',
   variable: '--font-sans'
 });

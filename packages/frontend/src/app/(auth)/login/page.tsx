@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function Login() {
   return (
     <div className="login-container container my-10 flex flex-col items-center justify-center">
-      <div className="login-card h-auto w-full rounded-md border bg-white py-8 md:max-w-md">
+      <div className="login-card h-auto w-full rounded-lg border bg-white py-8 md:max-w-md">
         <div className="login-content w-ful mx-auto flex flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="login-header flex flex-col space-y-5 text-center">
             <Image
