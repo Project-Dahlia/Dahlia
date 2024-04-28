@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
@@ -5,12 +7,31 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Icons } from '@/components/icons';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export function UserAuthForm() {
+  const pathName = usePathname();
+  const isRegister = pathName === '/register';
+
   return (
     <div className={cn('grid gap-6')}>
       <form>
         <div className="grid gap-5">
+          {isRegister && (
+            <div className="grid gap-1">
+              <Label className="sr-only" htmlFor="name">
+                Name
+              </Label>
+              <Input
+                id="name"
+                placeholder="Name"
+                type="text"
+                autoComplete="name"
+                autoCorrect="off"
+                className="bg-transparent text-muted-foreground outline-none focus:ring-0"
+              />
+            </div>
+          )}
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="email">
               Email
@@ -38,10 +59,14 @@ export function UserAuthForm() {
               className="bg-transparent text-muted-foreground outline-none"
             />
           </div>
-          <Link href="#" className="text-end text-sm text-blue-600">
-            Forget Password?
-          </Link>
-          <button className={cn(buttonVariants(), 'bg-black')}>Login</button>
+          {!isRegister && (
+            <Link href="#" className="text-end text-sm text-blue-600">
+              Forget Password?
+            </Link>
+          )}
+          <button className={cn(buttonVariants(), 'bg-black')}>
+            {isRegister ? 'Register' : 'Login'}
+          </button>
         </div>
       </form>
       <div className="relative">
