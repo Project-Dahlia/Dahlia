@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { fontHeading, fontSubheading, inter } from '@/assets/fonts';
 import StoreProvider from './StoreProvider';
 import '@/styles/globals.css';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/config/site';
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+import { Header } from '@/components/site-header';
 
 export const metadata: Metadata = {
   title: siteConfig.name,
@@ -22,10 +21,15 @@ export default function RootLayout({
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased',
-          inter.variable
+          inter.variable,
+          fontHeading.variable,
+          fontSubheading.variable
         )}
       >
-        <StoreProvider>{children}</StoreProvider>
+        <StoreProvider>
+          <Header />
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );
