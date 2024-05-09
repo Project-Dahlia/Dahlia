@@ -8,14 +8,32 @@ import { Label } from '@/components/ui/label';
 import { Icons } from '@/components/icons';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { userAuthSchema } from '@/lib/validation/auth';
+
+type FormSchema = z.infer<typeof userAuthSchema>;
 
 export function UserAuthForm() {
   const pathName = usePathname();
   const isRegister = pathName === '/register';
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormSchema>({
+    resolver: zodResolver(userAuthSchema)
+  });
+
+  const onSubmit: SubmitHandler<FormSchema> = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className={cn('grid gap-6')}>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-5">
           {isRegister && (
             <div className="grid gap-1">
@@ -28,8 +46,16 @@ export function UserAuthForm() {
                 type="text"
                 autoComplete="name"
                 autoCorrect="off"
-                className="bg-transparent text-muted-foreground outline-none focus:ring-0"
+                className={`border bg-transparent text-muted-foreground ${
+                  errors.name && 'border-red-500'
+                } outline-none focus:ring-0`}
+                {...register('name')}
               />
+              {errors?.name && (
+                <p className="px-1 text-xs text-red-600">
+                  {errors.name.message}
+                </p>
+              )}
             </div>
           )}
           <div className="grid gap-1">
@@ -43,8 +69,16 @@ export function UserAuthForm() {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              className="bg-transparent text-muted-foreground outline-none focus:ring-0"
+              className={`border bg-transparent text-muted-foreground ${
+                errors.email && 'border-red-500'
+              } outline-none focus:ring-0`}
+              {...register('email')}
             />
+            {errors?.email && (
+              <p className="px-1 text-xs text-red-600">
+                {errors.email.message}
+              </p>
+            )}
           </div>
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="password">
@@ -56,8 +90,16 @@ export function UserAuthForm() {
               type="password"
               autoCapitalize="none"
               autoCorrect="off"
-              className="bg-transparent text-muted-foreground outline-none"
+              className={`border bg-transparent text-muted-foreground ${
+                errors.password && 'border-red-500'
+              } outline-none focus:ring-0`}
+              {...register('password')}
             />
+            {errors?.password && (
+              <p className="px-1 text-xs text-red-600">
+                {errors.password.message}
+              </p>
+            )}
           </div>
           {!isRegister && (
             <Link href="#" className="text-end text-sm text-blue-600">
