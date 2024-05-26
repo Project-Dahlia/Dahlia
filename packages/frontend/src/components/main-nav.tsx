@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Logo from '@/../public/logo.svg';
 import Image from 'next/image';
 import { routes } from '@/config/site';
-import Map from './map/Map';
 
 export function MainNav() {
   return (
@@ -22,7 +21,6 @@ export function MainNav() {
             {route.label}
           </Link>
         ))}
-        <Map />
       </nav>
     </div>
   );

@@ -1,14 +1,22 @@
-import React from 'react';
+'use client';
+import React, { useEffect } from 'react';
 import { MapContainer, Marker, TileLayer, Popup } from 'react-leaflet';
+// import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
-const position: [number, number] = [51.505, -0.09];
+// const position: [number, number] = [51.505, -0.09];
 
 function Map() {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      require('leaflet');
+    }
+  }, []);
   return (
     <MapContainer
       style={{
         height: '100vh',
-        width: '100ww'
+        width: '100vw'
       }}
       center={[51.505, -0.09]}
       zoom={13}
