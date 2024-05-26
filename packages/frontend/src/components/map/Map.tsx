@@ -1,9 +1,9 @@
 import React from 'react';
-import { MapContainer, Marker, TileLayer, Popup } from 'react-Leaflet';
+import { MapContainer, Marker, TileLayer, Popup } from 'react-leaflet';
 
 const position: [number, number] = [51.505, -0.09];
 
-function MapComponent() {
+function Map() {
   return (
     <MapContainer
       style={{
@@ -27,8 +27,4 @@ function MapComponent() {
   );
 }
 
-<<<<<<< HEAD
 export default Map;
-=======
-export default MapComponent;
->>>>>>> 9271f94 (refactor(frontend): fixed naming conv)
