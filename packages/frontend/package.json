@@ -44,6 +44,8 @@
     "zod": "^3.22.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-interactions": "^7.6.17",
     "@storybook/addon-links": "^7.6.17",
