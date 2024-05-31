@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { fontHeading, fontSubheading, inter } from '@/assets/fonts';
-import StoreProvider from './StoreProvider';
+// import StoreProvider from './store-provider';
 import '@/styles/globals.css';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/config/site';
 import { Header } from '@/components/site-header';
+import { AuthProvider } from '../context/auth-provider';
 
 export const metadata: Metadata = {
   title: siteConfig.name,
@@ -26,10 +27,12 @@ export default function RootLayout({
           fontSubheading.variable
         )}
       >
-        <StoreProvider>
+        {/* <StoreProvider> */}
+        <AuthProvider>
           <Header />
           {children}
-        </StoreProvider>
+        </AuthProvider>
+        {/* </StoreProvider> */}
       </body>
     </html>
   );

@@ -8,8 +8,8 @@ export function Header() {
   const pathName = usePathname();
 
   // Conditional rendering of the auth buttons
-  const showLoginButton = pathName !== '/login';
-  const showRegisterButton = pathName !== '/register';
+  const showLoginButton = pathName !== '/api/auth/login';
+  const showRegisterButton = pathName !== '/api/auth/register';
 
   return (
     <header
@@ -27,7 +27,7 @@ export function Header() {
               className="border-gray-400 bg-white px-4 font-bold"
               aria-label="Login"
             >
-              <Link href="/login">Login</Link>
+              <Link href="/api/auth/login">Login</Link>
             </Button>
           )}
           {showRegisterButton && (
@@ -38,7 +38,7 @@ export function Header() {
               size="sm"
               aria-label="Register"
             >
-              <Link href="/register">Register</Link>
+              <Link href="/api/auth/register">Register</Link>
             </Button>
           )}
         </nav>
