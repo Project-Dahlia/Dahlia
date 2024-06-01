@@ -14,7 +14,7 @@ function Map() {
   }, []);
   return (
     <MapContainer
-      id="map"
+      data-testid="map"
       style={{
         height: '100vh',
         width: '100vw'
