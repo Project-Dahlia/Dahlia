@@ -27,9 +27,6 @@
   "author": "Devhub Team",
   "license": "ISC",
   "devDependencies": {
-    "@commitlint/cli": "^19.0.3",
-    "@commitlint/config-conventional": "^19.0.3",
-    "@types/leaflet": "^1.9.9",
     "husky": "^9.0.11",
     "lerna": "^8.1.2"
   },
@@ -37,10 +34,6 @@
     "./packages/*"
   ],
   "dependencies": {
-    "leaflet": "^1.9.4",
-    "nx": "^19.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-leaflet": "^4.2.1"
+    "nx": "^19.1.0"
   }
 }
