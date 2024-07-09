@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapContainer, Marker, TileLayer, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'tailwindcss/tailwind.css';
@@ -10,8 +10,24 @@ function Map() {
   const attribute =
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
   const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-  const markerPosition: LatLngTuple = [51.505, -0.09];
+  const [userPosition, setUserPosition] = useState<LatLngTuple | null>(null);
 
+  // Get user position
+  const getPosition = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserPosition([latitude, longitude]);
+        },
+        () => {
+          alert('Could not get your position');
+        }
+      );
+    } else {
+      alert('Geolocation is not supported by this browser.');
+    }
+  };
   //Check window
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -27,11 +43,13 @@ function Map() {
       scrollWheelZoom={false}
     >
       <TileLayer attribution={attribute} url={url} />
-      <Marker position={markerPosition}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
+      {userPosition && (
+        <Marker position={userPosition}>
+          <Popup>
+            Your current location. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      )}
     </MapContainer>
   );
 }
