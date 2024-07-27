@@ -1,22 +1,33 @@
+import axios from 'axios';
 import { User } from 'next-auth';
 
 export async function signInWithCredentials(email: string, password: string) {
-  const response = await fetch(`${process.env.BACKEND_URL}/api/v1/auth/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ email, password })
-  });
+  try {
+    const response = await axios.post(
+      `${process.env.BACKEND_URL}/api/v1/auth/login`,
+      {
+        email,
+        password
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
 
-  if (!response.ok) {
-    throw new Error('Invalid credentials');
+    const user = response.data;
+    console.log('response', user);
+
+    return user;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      if (error.response.status === 401) {
+        throw new Error('Invalid credentials');
+      }
+    }
+    throw new Error('An error occurred while signing in');
   }
-
-  const user = await response.json();
-  console.log('response', user);
-
-  return user;
 }
 
 export async function registerWithCredentials(
@@ -24,26 +35,33 @@ export async function registerWithCredentials(
   email: string,
   password: string
 ) {
-  const response = await fetch(
-    `${process.env.BACKEND_URL}/api/v1/auth/register`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
+  try {
+    const response = await axios.post(
+      `${process.env.BACKEND_URL}/api/v1/auth/register`,
+      {
+        name,
+        email,
+        password
       },
-      body: JSON.stringify({ name, email, password })
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    const user = response.data;
+    console.log('response', user);
+
+    return user;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      if (error.response.status === 400) {
+        throw new Error('Failed to register');
+      }
     }
-  );
-
-  if (!response.ok) {
-    throw new Error('Failed to register');
+    throw new Error('An error occurred while registering');
   }
-
-  const user = await response.json();
-
-  console.log('response', user);
-
-  return user;
 }
 
 export async function signInWithGoogle(
@@ -52,25 +70,32 @@ export async function signInWithGoogle(
   googleId: string,
   token: string
 ): Promise<User | null> {
-  const response = await fetch(
-    `${process.env.BACKEND_URL}/api/v1/auth/google-login`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+  try {
+    const response = await axios.post(
+      `${process.env.BACKEND_URL}/api/v1/auth/google-login`,
+      {
+        name,
+        email,
+        googleId
       },
-      body: JSON.stringify({ name, email, googleId })
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    const user = response.data;
+    console.log('google user 1', user);
+
+    return user;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      if (error.response.status === 401) {
+        throw new Error('Failed to authenticate with Google');
+      }
     }
-  );
-
-  if (!response.ok) {
-    throw new Error('Failed to authenticate with Google');
+    throw new Error('An error occurred while signing in with Google');
   }
-
-  const user = await response.json();
-
-  console.log('google user 1', user);
-
-  return user;
 }
