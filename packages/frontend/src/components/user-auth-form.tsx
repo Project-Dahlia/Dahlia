@@ -67,6 +67,27 @@ export function UserAuthForm() {
       });
     }
   };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signIn('google');
+
+      console.log('result right after sign in with google', result);
+      if (result?.error) {
+        console.error(result.error);
+      } else {
+        console.log('result of google auth sign in', result);
+        window.location.href = '/';
+      }
+    } catch (error) {
+      console.log('error', error);
+      setError('root', {
+        type: 'manual',
+        message: 'Google sign-in failed. Please try again.'
+      });
+    }
+  };
+
   console.log('errors', errors);
 
   return (
@@ -165,7 +186,7 @@ export function UserAuthForm() {
           buttonVariants({ variant: 'outline' }),
           'bg-transparent text-lg font-bold'
         )}
-        onClick={() => signIn('google')}
+        onClick={handleGoogleSignIn}
       >
         <Icons.google className="mr-2 h-6 w-6" />
         Google
