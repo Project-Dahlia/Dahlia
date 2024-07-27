@@ -6,5 +6,13 @@ export default async function Home() {
 
   console.log('session', session?.user);
 
-  return <main>{session ? <h1>Logged in</h1> : <h1>Not logged in</h1>}</main>;
+  return (
+    <main>
+      {session ? (
+        <h1>Logged in as {session?.user?.name}</h1>
+      ) : (
+        <h1>Not logged in</h1>
+      )}
+    </main>
+  );
 }

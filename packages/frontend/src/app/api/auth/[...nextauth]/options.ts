@@ -66,6 +66,9 @@ export const options: NextAuthOptions = {
     },
     async redirect({ url, baseUrl }) {
       // Custom redirect logic, if needed
+      if (url === '/api/auth/signin') {
+        return '/'; // Redirect to the index route after successful sign-in
+      }
       return url.startsWith(baseUrl) ? url : baseUrl;
     },
     async jwt({ token, user }) {
