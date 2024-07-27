@@ -1,10 +1,18 @@
+import React, { useEffect, useState } from 'react';
+import { getServerSession, Session } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
-import { getServerSession } from 'next-auth';
 
-export default async function Home() {
-  const session = await getServerSession(options);
+const Home = () => {
+  const [session, setSession] = useState<Session | null>(null);
 
-  console.log('session', session?.user);
+  useEffect(() => {
+    const fetchSession = async () => {
+      const session = await getServerSession(options);
+      setSession(session);
+    };
+
+    fetchSession();
+  }, []);
 
   return (
     <main>
@@ -15,4 +23,6 @@ export default async function Home() {
       )}
     </main>
   );
-}
+};
+
+export default Home;
