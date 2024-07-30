@@ -1,3 +1,5 @@
+'use client';
+import Map from '@/components/map/Map';
 import React, { useEffect, useState } from 'react';
 import { getServerSession, Session } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
@@ -21,6 +23,7 @@ const Home = () => {
       ) : (
         <h1>Not logged in</h1>
       )}
+      <Map />
     </main>
   );
 };

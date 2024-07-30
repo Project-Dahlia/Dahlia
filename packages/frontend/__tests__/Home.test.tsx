@@ -4,6 +4,15 @@ import '@testing-library/jest-dom';
 import Home from '../src/app/page';
 import { getServerSession } from 'next-auth';
 
+jest.mock('react-leaflet', () => ({
+  MapContainer: ({ children }: { children: React.ReactNode }) => (
+    <div data-testid="map">{children}</div>
+  ),
+  TileLayer: () => <div />,
+  Marker: () => <div />,
+  Popup: () => <div />
+}));
+
 // Mock next-auth
 jest.mock('next-auth', () => ({
   getServerSession: jest.fn()
@@ -37,5 +46,8 @@ describe('Home', () => {
     await waitFor(() => {
       expect(screen.getByText('Logged in as Test User')).toBeInTheDocument();
     });
+
+    // Check if Map renders
+    expect(screen.getByTestId('map')).toBeInTheDocument();
   });
 });
