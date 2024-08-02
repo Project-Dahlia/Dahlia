@@ -5,37 +5,37 @@ import Image from 'next/image';
 import Logo from '@/../public/logo.svg';
 
 export const metadata: Metadata = {
-  title: 'Login',
-  description: 'Sign in to your account securely and easily.'
+  title: 'Register your account',
+  description: 'Join our community and unlock exclusive features!'
 };
 
-export default function Login() {
+export default function Register() {
   return (
-    <div className="login-container container my-10 flex flex-col items-center justify-center">
-      <div className="login-card h-auto w-full rounded-lg border bg-white py-8 md:max-w-md">
-        <div className="login-content w-ful mx-auto flex flex-col justify-center space-y-6 sm:w-[350px]">
-          <div className="login-header flex flex-col space-y-5 text-center">
+    <div className="register-container container my-10 flex flex-col items-center justify-center">
+      <div className="register-card h-auto w-full rounded-lg border bg-white py-8 md:max-w-md">
+        <div className="register-content w-ful mx-auto flex flex-col justify-center space-y-6 sm:w-[350px]">
+          <div className="register-header flex flex-col space-y-5 text-center">
             <Image
               src={Logo}
               alt="logo"
               className="mx-auto h-10 w-24 object-contain"
             />
             <h1 className="font-subheading text-2xl font-semibold tracking-tight">
-              Welcome back
+              Create an Account
             </h1>
-            <p className="text-sm text-muted-foreground">
-              Enter your email to sign in to your account
+            <p className="px-12 text-sm text-muted-foreground">
+              Enter your email and password below to create your account
             </p>
           </div>
           <UserAuthForm />
           <div className="login-actions flex flex-col gap-4 text-center text-sm text-muted-foreground">
             <span className="px-5">
-              Don&apos;t have an account? Click here to{' '}
+              Already have an account? Click here to{' '}
               <Link
-                href="/register"
+                href="/api/auth/login"
                 className="hover:text-brand text-blue-600 underline underline-offset-4"
               >
-                Register
+                Login
               </Link>
             </span>
             <span className="px-12">
