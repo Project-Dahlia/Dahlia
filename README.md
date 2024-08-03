@@ -27,7 +27,7 @@ This will install all necessary dependencies and set up the Husky pre-commit hoo
 
 #### 2. Frontend Setup
 
-Navigate to ./packages/frontend/' directory and install the dependencies
+Navigate to './packages/frontend/' directory and install the dependencies
 
 ```bash
 cd ./packages/frontend
@@ -87,7 +87,3 @@ We welcome contributions to improve this project. Please fork the repository and
 ### Licensing
 
 This project is licensed under the MIT License.
-
-```md
-This `README.md` file includes instructions specific to setting up the Next.js frontend and the Node.js backend.
-```
