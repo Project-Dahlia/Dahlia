@@ -1,33 +1,84 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Header } from '@/components/site-header';
-import { MainNav } from '@/components/main-nav';
+import { usePathname } from 'next/navigation';
+
+// Mock the next/navigation module
+jest.mock('next/navigation', () => ({
+  usePathname: jest.fn()
+}));
+
+// Mock the next-auth/react module
+jest.mock('next-auth/react', () => ({
+  signOut: jest.fn()
+}));
 
 describe('Header Component', () => {
-  it('renders header with expected structure', () => {
-    render(<Header />);
-
-    const header = screen.getByRole('banner');
-    expect(header).toBeInTheDocument();
-
-    const container = screen.getByTestId('header-container');
-    expect(container).toBeInTheDocument();
+  beforeEach(() => {
+    // Reset mocks before each test
+    jest.clearAllMocks();
+    (usePathname as jest.Mock).mockReturnValue('/');
   });
 
-  it('renders login and register buttons', () => {
-    render(<Header />);
+  it('renders header with expected structure', () => {
+    render(<Header isAuthenticated={false} />);
 
-    const loginButton = screen.getByText('Login');
+    const header = screen.getByTestId('header-container');
+    expect(header).toBeInTheDocument();
+    expect(header).toHaveClass(
+      'sticky top-0 h-14 bg-white backdrop-blur-2xl sm:flex sm:justify-between'
+    );
+  });
+
+  it('renders login and register buttons when not authenticated', () => {
+    render(<Header isAuthenticated={false} />);
+
+    const loginButton = screen.getByRole('link', { name: /login/i });
     expect(loginButton).toBeInTheDocument();
 
-    const registerButton = screen.getByText('Register');
+    const registerButton = screen.getByRole('link', { name: /register/i });
     expect(registerButton).toBeInTheDocument();
   });
 
-  it('renders MainNav component', () => {
-    render(<MainNav />);
+  it('renders logout button when authenticated', () => {
+    render(<Header isAuthenticated={true} />);
 
-    const mainNav = screen.getByRole('navigation');
+    const logoutButton = screen.getByRole('link', { name: /logout/i });
+    expect(logoutButton).toBeInTheDocument();
+
+    expect(
+      screen.queryByRole('link', { name: /login/i })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: /register/i })
+    ).not.toBeInTheDocument();
+  });
+
+  it('does not render login button on login page', () => {
+    (usePathname as jest.Mock).mockReturnValue('/api/auth/login');
+    render(<Header isAuthenticated={false} />);
+
+    expect(
+      screen.queryByRole('link', { name: /login/i })
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /register/i })).toBeInTheDocument();
+  });
+
+  it('does not render register button on register page', () => {
+    (usePathname as jest.Mock).mockReturnValue('/api/auth/register');
+    render(<Header isAuthenticated={false} />);
+
+    expect(screen.getByRole('link', { name: /login/i })).toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: /register/i })
+    ).not.toBeInTheDocument();
+  });
+
+  it('renders MainNav component', () => {
+    render(<Header isAuthenticated={false} />);
+
+    // Assuming MainNav renders a nav element
+    const mainNav = screen.getAllByRole('navigation')[0];
     expect(mainNav).toBeInTheDocument();
   });
 });
