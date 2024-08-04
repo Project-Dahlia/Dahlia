@@ -1,25 +1,24 @@
 'use client';
+
 import Map from '@/components/map/Map';
-import React, { useEffect, useState } from 'react';
-import { getServerSession, Session } from 'next-auth';
-import { options } from '@/app/api/auth/[...nextauth]/options';
+import React from 'react';
+import { useAuth } from '@/lib/hooks/use-auth'; // Adjust the import path as needed
 
 const Home = () => {
-  const [session, setSession] = useState<Session | null>(null);
+  const { isAuthenticated, isLoading, user } = useAuth();
 
-  useEffect(() => {
-    const fetchSession = async () => {
-      const session = await getServerSession(options);
-      setSession(session);
-    };
-
-    fetchSession();
-  }, []);
+  if (isLoading) {
+    return (
+      <main>
+        <h1>Loading...</h1>
+      </main>
+    );
+  }
 
   return (
     <main>
-      {session ? (
-        <h1>Logged in as {session?.user?.name}</h1>
+      {isAuthenticated && user ? (
+        <h1>Logged in as {user.name}</h1>
       ) : (
         <h1>Not logged in</h1>
       )}

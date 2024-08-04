@@ -14,7 +14,8 @@ const config = {
   },
   transformIgnorePatterns: ['node_modules/(?!(react-leaflet|leaflet)/)'],
   moduleNameMapper: {
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy'
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    '^@/(.*)$': '<rootDir>/src/$1'
   }
 };
 

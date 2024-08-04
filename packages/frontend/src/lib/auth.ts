@@ -17,7 +17,6 @@ export async function signInWithCredentials(email: string, password: string) {
     );
 
     const user = response.data;
-    console.log('response', user);
 
     return user;
   } catch (error) {
@@ -51,7 +50,6 @@ export async function registerWithCredentials(
     );
 
     const user = response.data;
-    console.log('response', user);
 
     return user;
   } catch (error) {

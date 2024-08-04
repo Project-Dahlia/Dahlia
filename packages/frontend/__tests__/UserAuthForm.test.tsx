@@ -1,86 +1,53 @@
-// import { render, screen } from '@testing-library/react';
-// import { UserAuthForm } from '@/components/user-auth-form';
-
-// const mockUsePathname = jest.fn();
-
-// jest.mock('next/navigation', () => ({
-//   usePathname() {
-//     return mockUsePathname();
-//   }
-// }));
-
-// describe('Test the user auth form component', () => {
-//   beforeEach(() => {
-//     mockUsePathname.mockClear();
-//   });
-
-//   it('renders register form for /register path', () => {
-//     mockUsePathname.mockReturnValue('/api/auth/register');
-//     render(<UserAuthForm />);
-
-//     expect(screen.getByLabelText('Name')).toBeInTheDocument();
-//     expect(screen.getByLabelText('Email')).toBeInTheDocument();
-//     expect(screen.getByLabelText('Password')).toBeInTheDocument();
-//     expect(
-//       screen.getByRole('button', { name: /Register/i })
-//     ).toBeInTheDocument();
-//     expect(screen.getByRole('button', { name: /Google/i })).toBeInTheDocument();
-//     expect(screen.queryByText('Forget Password?')).not.toBeInTheDocument();
-//   });
-
-//   it('renders login form for /login path', () => {
-//     mockUsePathname.mockReturnValue('/api/auth/login');
-//     render(<UserAuthForm />);
-
-//     expect(screen.queryByLabelText('Name')).not.toBeInTheDocument();
-//     expect(screen.getByLabelText('Email')).toBeInTheDocument();
-//     expect(screen.getByLabelText('Password')).toBeInTheDocument();
-//     expect(screen.getByRole('button', { name: /Login/i })).toBeInTheDocument();
-//     expect(screen.getByRole('button', { name: /Google/i })).toBeInTheDocument();
-//     expect(screen.getByText('Forget Password?')).toBeInTheDocument();
-//   });
-// });
-
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { UserAuthForm } from '@/components/user-auth-form';
-import { usePathname } from 'next/navigation';
-import { signIn } from 'next-auth/react';
+import { usePathname, useRouter } from 'next/navigation';
+import * as authHandlers from '@/lib/handlers/auth-handler';
+import * as googleAuthHandlers from '@/lib/handlers/google-auth-handler';
 
-// Mock next-auth and next/router
-jest.mock('next-auth/react', () => ({
-  signIn: jest.fn()
-}));
-
-jest.mock('next/router', () => ({
+jest.mock('next/navigation', () => ({
+  usePathname: jest.fn(),
   useRouter: jest.fn()
 }));
 
-jest.mock('next/navigation', () => ({
-  usePathname: jest.fn()
+jest.mock('@/lib/handlers/auth-handler', () => ({
+  createOnSubmit: jest.fn()
+}));
+
+jest.mock('@/lib/handlers/google-auth-handler', () => ({
+  handleGoogleSignIn: jest.fn()
 }));
 
 describe('UserAuthForm', () => {
+  const mockRouter = { push: jest.fn() };
+
   beforeEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
+    (useRouter as jest.Mock).mockReturnValue(mockRouter);
+    (usePathname as jest.Mock).mockReturnValue('/');
   });
 
   it('renders the login form by default', () => {
     render(<UserAuthForm />);
     expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
-    expect(screen.getByText('Login')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument();
   });
 
   it('renders the registration form if pathname is /api/auth/register', () => {
     (usePathname as jest.Mock).mockReturnValue('/api/auth/register');
     render(<UserAuthForm />);
     expect(screen.getByPlaceholderText('Name')).toBeInTheDocument();
-    expect(screen.getByText('Register')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Register' })
+    ).toBeInTheDocument();
   });
 
-  it('submits the form with email and password for login', async () => {
+  it('calls createOnSubmit with correct parameters for login', async () => {
+    const mockOnSubmit = jest.fn();
+    (authHandlers.createOnSubmit as jest.Mock).mockReturnValue(mockOnSubmit);
+
     render(<UserAuthForm />);
     fireEvent.change(screen.getByPlaceholderText('Email'), {
       target: { value: 'test@example.com' }
@@ -89,19 +56,32 @@ describe('UserAuthForm', () => {
       target: { value: 'password' }
     });
 
-    fireEvent.click(screen.getByText('Login'));
+    fireEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() => {
-      expect(signIn).toHaveBeenCalledWith('credentials', {
-        redirect: false,
-        email: 'test@example.com',
-        password: 'password'
-      });
+      expect(authHandlers.createOnSubmit).toHaveBeenCalledWith(
+        expect.any(Function),
+        false,
+        mockRouter
+      );
+    });
+
+    await waitFor(() => {
+      expect(mockOnSubmit).toHaveBeenCalledWith(
+        {
+          email: 'test@example.com',
+          password: 'password'
+        },
+        expect.anything()
+      );
     });
   });
 
-  it('submits the form with name, email, and password for registration', async () => {
+  it('calls createOnSubmit with correct parameters for registration', async () => {
     (usePathname as jest.Mock).mockReturnValue('/api/auth/register');
+    const mockOnSubmit = jest.fn();
+    (authHandlers.createOnSubmit as jest.Mock).mockReturnValue(mockOnSubmit);
+
     render(<UserAuthForm />);
     fireEvent.change(screen.getByPlaceholderText('Name'), {
       target: { value: 'Test User' }
@@ -113,24 +93,37 @@ describe('UserAuthForm', () => {
       target: { value: 'password' }
     });
 
-    fireEvent.click(screen.getByText('Register'));
+    fireEvent.click(screen.getByRole('button', { name: 'Register' }));
 
     await waitFor(() => {
-      expect(signIn).toHaveBeenCalledWith('credentials', {
-        redirect: false,
-        email: 'test@example.com',
-        password: 'password',
-        name: 'Test User'
-      });
+      expect(authHandlers.createOnSubmit).toHaveBeenCalledWith(
+        expect.any(Function),
+        true,
+        mockRouter
+      );
+    });
+
+    await waitFor(() => {
+      expect(mockOnSubmit).toHaveBeenCalledWith(
+        {
+          name: 'Test User',
+          email: 'test@example.com',
+          password: 'password'
+        },
+        expect.anything()
+      );
     });
   });
 
   it('handles Google sign-in', async () => {
     render(<UserAuthForm />);
-    fireEvent.click(screen.getByText('Google'));
+    fireEvent.click(screen.getByRole('button', { name: 'Google' }));
 
     await waitFor(() => {
-      expect(signIn).toHaveBeenCalledWith('google');
+      expect(googleAuthHandlers.handleGoogleSignIn).toHaveBeenCalledWith(
+        expect.any(Function),
+        mockRouter
+      );
     });
   });
 });

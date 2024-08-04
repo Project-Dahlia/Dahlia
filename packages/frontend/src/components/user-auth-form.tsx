@@ -7,20 +7,17 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Icons } from '@/components/icons';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { z } from 'zod';
+import { usePathname, useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { userAuthSchema } from '@/lib/validation/auth';
-import { signIn } from 'next-auth/react';
-
-type FormSchema = z.infer<typeof userAuthSchema>;
+import { useForm } from 'react-hook-form';
+import { userAuthSchema, FormSchema } from '@/lib/validation/auth';
+import { createOnSubmit } from '@/lib/handlers/auth-handler';
+import { handleGoogleSignIn } from '@/lib/handlers/google-auth-handler';
 
 export function UserAuthForm() {
   const pathName = usePathname();
   const isRegister = pathName === '/api/auth/register';
-
-  // const router = useRouter();
+  const router = useRouter();
 
   const {
     register,
@@ -31,64 +28,7 @@ export function UserAuthForm() {
     resolver: zodResolver(userAuthSchema)
   });
 
-  const onSubmit: SubmitHandler<FormSchema> = async (data) => {
-    try {
-      if (isRegister) {
-        const result = await signIn('credentials', {
-          redirect: false,
-          email: data.email,
-          password: data.password,
-          name: data.name
-        });
-
-        if (result?.error) {
-          console.error(result.error);
-        } else {
-          window.location.href = '/';
-        }
-      } else {
-        const result = await signIn('credentials', {
-          redirect: false,
-          email: data.email,
-          password: data.password
-        });
-
-        if (result?.error) {
-          console.error(result.error);
-        } else {
-          window.location.href = '/';
-        }
-      }
-    } catch (error) {
-      console.log('error', error);
-      setError('root', {
-        type: 'manual',
-        message: 'Submission failed. Please try again.'
-      });
-    }
-  };
-
-  const handleGoogleSignIn = async () => {
-    try {
-      const result = await signIn('google');
-
-      console.log('result right after sign in with google', result);
-      if (result?.error) {
-        console.error(result.error);
-      } else {
-        console.log('result of google auth sign in', result);
-        window.location.href = '/';
-      }
-    } catch (error) {
-      console.log('error', error);
-      setError('root', {
-        type: 'manual',
-        message: 'Google sign-in failed. Please try again.'
-      });
-    }
-  };
-
-  console.log('errors', errors);
+  const onSubmit = createOnSubmit(setError, isRegister, router);
 
   return (
     <div className={cn('grid gap-6')}>
@@ -186,7 +126,7 @@ export function UserAuthForm() {
           buttonVariants({ variant: 'outline' }),
           'bg-transparent text-lg font-bold'
         )}
-        onClick={handleGoogleSignIn}
+        onClick={() => handleGoogleSignIn(setError, router)}
       >
         <Icons.google className="mr-2 h-6 w-6" />
         Google
