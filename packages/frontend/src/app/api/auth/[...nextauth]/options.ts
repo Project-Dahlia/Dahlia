@@ -1,4 +1,4 @@
-import type { Account, NextAuthOptions, User } from 'next-auth';
+import type { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import {
@@ -6,6 +6,8 @@ import {
   registerWithCredentials,
   signInWithGoogle
 } from '@/lib/auth';
+import { JWT } from 'next-auth/jwt';
+import { IUserData } from '@/types/next-auth';
 
 export const options: NextAuthOptions = {
   providers: [
@@ -27,14 +29,18 @@ export const options: NextAuthOptions = {
           name?: string;
         };
 
+        let userData;
+
         if (name) {
           // Handle registration
-          const user = await registerWithCredentials(name, email, password);
-          return user ? user : null; // Return user or null if registration fails
+          userData = await registerWithCredentials(name, email, password);
         } else {
           // Handle login
-          const user = await signInWithCredentials(email, password);
-          return user ? user : null; // Return user or null if login fails
+          userData = await signInWithCredentials(email, password);
+        }
+
+        if (userData) {
+          return userData;
         }
       }
     })
@@ -43,45 +49,38 @@ export const options: NextAuthOptions = {
     signIn: '/api/auth/login'
   },
   callbacks: {
-    async signIn({ user, account }) {
-      const { name, email } = user as User;
-      const { providerAccountId: googleId, access_token: token } =
-        account as Account;
-
+    async signIn({ user, account, profile }) {
       if (account?.provider === 'google') {
-        // Handle sign in with Google
+        try {
+          const { name, email } = user;
+          const googleId = profile?.sub;
+          const token = account.access_token;
 
-        // check if name exists
-        if (!name || !email || !googleId || !token) {
-          throw new Error('Missing parameters for Google sign-in');
+          if (!name || !email || !googleId || !token) {
+            throw new Error('Missing parameters for Google sign-in');
+          }
+
+          const userData = await signInWithGoogle(name, email, googleId, token);
+          if (userData) {
+            return true;
+          }
+        } catch (error) {
+          console.error('Google sign-in error:', error);
+          return false;
         }
-
-        console.log(name, email, googleId, token);
-        const userData = await signInWithGoogle(name, email, googleId, token);
-        return !!userData; // return true if user exists, otherwise false
       }
+      return true;
+    },
 
-      // Additional checks for other providers (e.g., CredentialsProvider)
-      return true; // Assuming all other sign-ins are allowed
-    },
-    async redirect({ url, baseUrl }) {
-      // Custom redirect logic, if needed
-      if (url === '/api/auth/signin') {
-        return '/'; // Redirect to the index route after successful sign-in
-      }
-      return url.startsWith(baseUrl) ? url : baseUrl;
-    },
     async jwt({ token, user }) {
-      // Add custom fields to the token, if necessary
       if (user) {
-        token.id = user.id;
+        token = { ...token, ...user };
       }
       return token;
     },
     async session({ session, token }) {
-      // Add custom fields to the session, if necessary
-      if (token) {
-        // session.user = token.id;
+      if (token && session.user) {
+        session.user = token as IUserData;
       }
       return session;
     }
@@ -93,5 +92,16 @@ export const options: NextAuthOptions = {
   },
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET as string
+  },
+  cookies: {
+    sessionToken: {
+      name: 'next-auth.session-token',
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production'
+      }
+    }
   }
 };
