@@ -44,6 +44,16 @@ describe('UserAuthForm', () => {
     ).toBeInTheDocument();
   });
 
+  it('renders the reset password form if pathname is /api/auth/reset-password', () => {
+    (usePathname as jest.Mock).mockReturnValue('/api/auth/reset-password');
+    render(<UserAuthForm />);
+    expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
+    expect(screen.queryByPlaceholderText('Password')).not.toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Request Password Reset Link' })
+    ).toBeInTheDocument();
+  });
+
   it('calls createOnSubmit with correct parameters for login', async () => {
     const mockOnSubmit = jest.fn();
     (authHandlers.createOnSubmit as jest.Mock).mockReturnValue(mockOnSubmit);
