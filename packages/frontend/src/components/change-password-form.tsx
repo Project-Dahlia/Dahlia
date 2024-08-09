@@ -21,7 +21,11 @@ import { cn } from '@/lib/utils';
 
 export function ChangePasswordForm() {
   const form = useForm<ChangePasswordFormSchema>({
-    resolver: zodResolver(changePasswordSchema)
+    resolver: zodResolver(changePasswordSchema),
+    defaultValues: {
+      password: '',
+      confirmPassword: ''
+    }
   });
 
   const onSubmit = (data: ChangePasswordFormSchema) => {
