@@ -2,6 +2,7 @@ import { signIn } from 'next-auth/react';
 import { UseFormSetError } from 'react-hook-form';
 import { FormSchema } from '../validation/auth';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export const handleGoogleSignIn = async (
   setError: UseFormSetError<FormSchema>,
@@ -20,6 +21,7 @@ export const handleGoogleSignIn = async (
         type: 'manual',
         message: result.error
       });
+      toast.error(result.error);
     } else {
       // Google sign-in successful, redirect to home page
       router.push('/');
@@ -30,5 +32,6 @@ export const handleGoogleSignIn = async (
       type: 'manual',
       message: 'Google sign-in failed. Please try again.'
     });
+    toast.error('Google sign-in failed. Please try again.');
   }
 };
