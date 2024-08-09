@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { fontHeading, fontSubheading, inter } from '@/assets/fonts';
 // import StoreProvider from './store-provider';
+import { Toaster } from '@/components/ui/sonner';
 import '@/styles/globals.css';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/config/site';
@@ -32,6 +33,7 @@ export default function RootLayout({
           <AuthLayout>{children}</AuthLayout>
         </AuthProvider>
         {/* </StoreProvider> */}
+        <Toaster />
       </body>
     </html>
   );
