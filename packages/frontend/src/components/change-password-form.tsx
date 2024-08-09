@@ -24,10 +24,6 @@ export function ChangePasswordForm() {
     resolver: zodResolver(changePasswordSchema)
   });
 
-  const {
-    register,
-    formState: { errors }
-  } = form;
   const onSubmit = (data: ChangePasswordFormSchema) => {
     // handle form submission
     console.log(data);
@@ -48,15 +44,17 @@ export function ChangePasswordForm() {
                   type="password"
                   autoCapitalize="none"
                   autoCorrect="off"
-                  className={cn('border', errors.password && 'border-red-500')}
+                  className={cn(
+                    'border',
+                    form.formState.errors.password && 'border-red-500'
+                  )}
                   {...field}
-                  {...register('password')}
                 />
               </FormControl>
-              {errors?.password && (
+              {form.formState.errors.password && (
                 <FormMessage>
                   <p className="text-xs text-red-600">
-                    {errors.password?.message}
+                    {form.formState.errors.password?.message}
                   </p>
                 </FormMessage>
               )}
@@ -78,16 +76,15 @@ export function ChangePasswordForm() {
                   autoCorrect="off"
                   className={cn(
                     'border',
-                    errors.confirmPassword && 'border-red-500'
+                    form.formState.errors.confirmPassword && 'border-red-500'
                   )}
                   {...field}
-                  {...register('confirmPassword')}
                 />
               </FormControl>
-              {errors?.confirmPassword && (
+              {form.formState.errors.confirmPassword && (
                 <FormMessage>
                   <p className="text-xs text-red-600">
-                    {errors.confirmPassword?.message}
+                    {form.formState.errors.confirmPassword?.message}
                   </p>
                 </FormMessage>
               )}
