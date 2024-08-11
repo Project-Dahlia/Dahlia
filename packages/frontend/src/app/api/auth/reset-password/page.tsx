@@ -1,8 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { UserAuthForm } from '@/components/user-auth-form';
-import Image from 'next/image';
-import Logo from '@/../public/logo.svg';
+import { Logo } from '@/components/logo';
 
 export const metadata: Metadata = {
   title: 'Reset Password',
@@ -14,19 +13,15 @@ export default function ResetPassword() {
     <div className="reset-container container my-10 flex flex-col items-center justify-center">
       <div className="reset-card h-auto w-full rounded-lg border bg-white py-14 md:max-w-md">
         <div className="reset-content mx-auto flex w-full flex-col justify-center space-y-10 sm:w-[350px]">
-          <div className="reset-header flex flex-col space-y-5 text-center">
-            <Image
-              src={Logo}
-              alt="logo"
-              className="mx-auto h-10 w-24 object-contain"
-            />
+          <header className="reset-header flex flex-col space-y-5 text-center">
+            <Logo className="mx-auto h-10 w-24 object-contain" />
             <h1 className="font-subheading text-2xl font-semibold tracking-tight">
               Forget Password
             </h1>
             <p className="text-sm text-muted-foreground">
               Enter password reset email below
             </p>
-          </div>
+          </header>
           <UserAuthForm />
           <div className="reset-actions flex flex-col text-center text-sm text-muted-foreground">
             <span>
