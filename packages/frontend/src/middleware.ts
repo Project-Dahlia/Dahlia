@@ -9,6 +9,7 @@ const unauthorizedRoutes = [
 ];
 
 export async function middleware(request: NextRequest) {
+  console.log('Middleware invoked'); // Debug log
   // Check if the current route is in the unauthorizedRoutes list
   if (
     unauthorizedRoutes.some((route) =>

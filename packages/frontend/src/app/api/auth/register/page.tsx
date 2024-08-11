@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { UserAuthForm } from '@/components/user-auth-form';
+import { UserAuthForm } from '@/components/auth/user-auth-form';
 import Image from 'next/image';
 import Logo from '@/../public/logo.svg';
 
