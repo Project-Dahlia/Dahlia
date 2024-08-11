@@ -5,7 +5,7 @@ import React from 'react';
 import { useAuth } from '@/lib/hooks/use-auth'; // Adjust the import path as needed
 
 const Home = () => {
-  const { isAuthenticated, isLoading, user } = useAuth();
+  const { isLoading } = useAuth();
 
   if (isLoading) {
     return (
@@ -17,11 +17,6 @@ const Home = () => {
 
   return (
     <main>
-      {isAuthenticated && user ? (
-        <h1>Logged in as {user.name}</h1>
-      ) : (
-        <h1>Not logged in</h1>
-      )}
       <Map />
     </main>
   );
