@@ -3,6 +3,7 @@ import { SubmitHandler, UseFormSetError } from 'react-hook-form';
 import { SignInPayload, RegisterPayload } from '@/types';
 import { FormSchema } from '@/lib/validation/auth';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export const createOnSubmit = (
   setError: UseFormSetError<FormSchema>,
@@ -37,6 +38,7 @@ export const createOnSubmit = (
           type: 'manual',
           message: result.error
         });
+        toast.error(result.error);
       } else {
         // Save user profile to localStorage
         if (result?.ok) {
@@ -49,6 +51,7 @@ export const createOnSubmit = (
         type: 'manual',
         message: 'An unexpected error occurred. Please try again.'
       });
+      toast.error('An unexpected error occurred. Please try again.');
     }
   };
 };

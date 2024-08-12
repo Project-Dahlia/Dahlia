@@ -4,6 +4,7 @@ import { getToken } from 'next-auth/jwt';
 const unauthorizedRoutes = [
   '/api/auth/login',
   '/api/auth/register',
+  'api/auth/reset-password',
   '/api/auth/callback/google',
   '/api/auth/callback/credentials'
 ];

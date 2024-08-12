@@ -17,4 +17,16 @@ export const userAuthSchema = z.object({
     .min(6, { message: 'Password must be at least 6 characters.' })
 });
 
+export const changePasswordSchema = z
+  .object({
+    password: z.string().min(6, 'Password must be at least 6 characters'),
+    confirmPassword: z.string()
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword']
+  });
+
+export type ChangePasswordFormSchema = z.infer<typeof changePasswordSchema>;
+
 export type FormSchema = z.infer<typeof userAuthSchema>;
