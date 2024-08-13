@@ -26,7 +26,7 @@ describe('Header Component', () => {
     const header = screen.getByTestId('header-container');
     expect(header).toBeInTheDocument();
     expect(header).toHaveClass(
-      'sticky top-0 h-14 bg-white backdrop-blur-2xl sm:flex sm:justify-between'
+      'sticky inset-x-0 top-0 z-50 h-14 w-full border-b border-border bg-white px-4 backdrop-blur-lg'
     );
   });
 
