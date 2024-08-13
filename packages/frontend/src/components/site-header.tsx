@@ -14,12 +14,12 @@ export function Header({ isAuthenticated }: { isAuthenticated: boolean }) {
 
   return (
     <header
-      className="sticky top-0 h-14 bg-white backdrop-blur-2xl sm:flex sm:justify-between"
+      className="sticky inset-x-0 top-0 z-50 h-14 w-full border-b border-border bg-white px-4 backdrop-blur-lg"
       data-testid="header-container"
     >
-      <div className="flex w-full items-center justify-between">
+      <div className="mx-auto flex h-full items-center justify-between px-2.5 md:max-w-screen-xl lg:px-10">
         <MainNav />
-        <nav className="flex items-center gap-6 py-2 sm:mx-4 lg:mx-6">
+        <nav className="flex min-w-[190px] flex-shrink-0 items-center justify-end gap-4">
           {showLoginButton && !isAuthenticated && (
             <Button
               asChild
@@ -35,7 +35,7 @@ export function Header({ isAuthenticated }: { isAuthenticated: boolean }) {
             <Button
               asChild
               variant="default"
-              className="lg:px-6font-bold sm:px-4"
+              className="font-bold sm:px-4 lg:px-6"
               size="sm"
               aria-label="Register"
             >
