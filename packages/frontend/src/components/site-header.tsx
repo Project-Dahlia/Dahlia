@@ -17,7 +17,7 @@ export function Header({ isAuthenticated }: { isAuthenticated: boolean }) {
       className="sticky inset-x-0 top-0 z-50 h-14 w-full border-b border-border bg-white px-4 backdrop-blur-lg"
       data-testid="header-container"
     >
-      <div className="mx-auto flex h-full items-center justify-between px-2.5 md:max-w-screen-xl lg:px-10">
+      <div className="flex h-full items-center justify-between px-2.5 md:max-w-screen-xl lg:px-10">
         <MainNav />
         <nav className="flex min-w-[190px] flex-shrink-0 items-center justify-end gap-4">
           {showLoginButton && !isAuthenticated && (

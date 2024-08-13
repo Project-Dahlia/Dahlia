@@ -7,7 +7,7 @@ import { routes } from '@/config/site';
 export function MainNav() {
   return (
     <div className="flex w-full items-center justify-between">
-      <div className="flex items-center">
+      <div className="flex items-center lg:px-10">
         <Link href="/">
           <Logo alt="site-logo" className="h-10 w-24" />
         </Link>
