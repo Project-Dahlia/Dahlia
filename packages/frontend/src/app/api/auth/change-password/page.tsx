@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { ChangePasswordForm } from '@/components/change-password-form';
-import { Logo } from '@/components/logo';
+import { Logo } from '@/components/common/logo';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 export default function ChangePassword() {
   return (
-    <div className="change-password-container container my-10 flex flex-col items-center justify-center">
-      <div className="change-password-card h-auto w-full rounded-lg border bg-white py-8 md:max-w-md">
+    <div className="change-password-container container my-10 flex  flex-col items-center justify-center">
+      <div className="change-password-card  min-h-[636px] w-full rounded-lg border bg-white py-8 md:max-w-md">
         <div className="change-password-content w-ful mx-auto flex flex-col justify-center space-y-6 sm:w-[350px]">
           <header className="change-password-header flex flex-col space-y-5 text-center">
             <Logo className="mx-auto h-10 w-24 object-contain" />
@@ -23,7 +23,7 @@ export default function ChangePassword() {
             </p>
           </header>
           <ChangePasswordForm />
-          <div className="reset-actions flex flex-col gap-4 text-center text-sm text-muted-foreground">
+          <div className="reset-actions flex flex-col gap-4 pt-40 text-center text-sm text-muted-foreground">
             <span className="px-5">
               Go back to{' '}
               <Link
