@@ -7,7 +7,10 @@ import { routes } from '@/config/site';
 
 export function MainNav() {
   return (
-    <div className="relative flex h-14 w-full items-center justify-stretch px-2 sm:px-4 lg:px-6">
+    <div
+      className="relative flex h-14 w-full items-center justify-stretch px-2 sm:px-4 lg:px-6"
+      data-testid="main-nav"
+    >
       <Link href="/">
         <Image src={Logo} alt="site-logo" className="h-10 w-24" />
       </Link>
