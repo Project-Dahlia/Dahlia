@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Logo from '@/../public/logo.svg';
-import Image from 'next/image';
+import { Logo } from '@/components/common/logo';
 import { routes } from '@/config/site';
 
 export function MainNav() {
@@ -12,7 +11,7 @@ export function MainNav() {
       data-testid="main-nav"
     >
       <Link href="/">
-        <Image src={Logo} alt="site-logo" className="h-10 w-24" />
+        <Logo alt="site-logo" className="h-10 w-24" />
       </Link>
       <nav className=" mx-auto hidden items-center gap-10 md:flex">
         {routes.map((route, i) => (

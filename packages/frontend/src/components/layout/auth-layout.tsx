@@ -24,6 +24,7 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
           <div className="flex-1">{children}</div>
         </div>
       )}
+      {!isAuthenticated && <div>{children}</div>}
     </>
   );
 }
