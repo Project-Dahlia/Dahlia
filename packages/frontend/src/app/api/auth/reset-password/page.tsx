@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { UserAuthForm } from '@/components/user-auth-form';
-import { Logo } from '@/components/logo';
+import { UserAuthForm } from '@/components/auth/user-auth-form';
+import { Logo } from '@/components/common/logo';
 
 export const metadata: Metadata = {
   title: 'Reset Password',
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function ResetPassword() {
   return (
     <div className="reset-container container my-10 flex flex-col items-center justify-center">
-      <div className="reset-card h-auto w-full rounded-lg border bg-white py-14 md:max-w-md">
+      <div className="reset-card min-h-[636px] w-full rounded-lg border bg-white py-14 md:max-w-md">
         <div className="reset-content mx-auto flex w-full flex-col justify-center space-y-10 sm:w-[350px]">
           <header className="reset-header flex flex-col space-y-5 text-center">
             <Logo className="mx-auto h-10 w-24 object-contain" />
@@ -23,7 +23,7 @@ export default function ResetPassword() {
             </p>
           </header>
           <UserAuthForm />
-          <div className="reset-actions flex flex-col text-center text-sm text-muted-foreground">
+          <div className="reset-actions bottom-10 flex flex-col pt-40 text-center text-sm text-muted-foreground">
             <span>
               Go back to{' '}
               <Link

@@ -1,4 +1,4 @@
-import { NavItem, SiteConfig } from '@/types';
+import { NavItem, SiteConfig, SidebarItem } from '@/types';
 
 export const siteConfig: SiteConfig = {
   name: 'Dahlia',
@@ -15,5 +15,38 @@ export const routes: NavItem[] = [
   {
     href: '/help',
     label: 'Help'
+  }
+];
+
+export const sidebarRoutes: SidebarItem[] = [
+  {
+    href: '/parking',
+    label: 'Parking',
+    icon: 'parking'
+  },
+  {
+    href: '/events',
+    label: 'Events',
+    icon: 'events'
+  },
+  {
+    href: '/insights',
+    label: 'Insights',
+    icon: 'insights'
+  },
+  {
+    href: '/notifications',
+    label: 'Notifications',
+    icon: 'notifications'
+  },
+  {
+    href: '/settings',
+    label: 'Settings',
+    icon: 'settings'
+  },
+  {
+    href: '/support',
+    label: 'Support',
+    icon: 'support'
   }
 ];

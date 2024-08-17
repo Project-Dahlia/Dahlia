@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { UserAuthForm } from '@/components/user-auth-form';
+import { UserAuthForm } from '@/components/auth/user-auth-form';
 import { usePathname, useRouter } from 'next/navigation';
 import * as authHandlers from '@/lib/handlers/auth-handler';
 import * as googleAuthHandlers from '@/lib/handlers/google-auth-handler';

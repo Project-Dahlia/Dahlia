@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { UserAuthForm } from '@/components/user-auth-form';
-import { Logo } from '@/components/logo';
+import { UserAuthForm } from '@/components/auth/user-auth-form';
+import { Logo } from '@/components/common/logo';
 
 export const metadata: Metadata = {
   title: 'Register your account',

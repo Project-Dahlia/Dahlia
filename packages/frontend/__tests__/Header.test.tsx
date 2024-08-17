@@ -1,16 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Header } from '@/components/site-header';
+import { Header } from '@/components/common/site-header';
 import { usePathname } from 'next/navigation';
+import { CollapseProvider } from '@/context/collapse-context'; // Adjust the import path as needed
 
 // Mock the next/navigation module
 jest.mock('next/navigation', () => ({
   usePathname: jest.fn()
-}));
-
-// Mock the next-auth/react module
-jest.mock('next-auth/react', () => ({
-  signOut: jest.fn()
 }));
 
 describe('Header Component', () => {
@@ -20,8 +16,12 @@ describe('Header Component', () => {
     (usePathname as jest.Mock).mockReturnValue('/');
   });
 
+  const renderWithCollapseProvider = (ui: React.ReactElement) => {
+    return render(<CollapseProvider>{ui}</CollapseProvider>);
+  };
+
   it('renders header with expected structure', () => {
-    render(<Header isAuthenticated={false} />);
+    renderWithCollapseProvider(<Header />);
 
     const header = screen.getByTestId('header-container');
     expect(header).toBeInTheDocument();
@@ -30,8 +30,8 @@ describe('Header Component', () => {
     );
   });
 
-  it('renders login and register buttons when not authenticated', () => {
-    render(<Header isAuthenticated={false} />);
+  it('renders login and register buttons when not on their respective pages', () => {
+    renderWithCollapseProvider(<Header />);
 
     const loginButton = screen.getByRole('link', { name: /login/i });
     expect(loginButton).toBeInTheDocument();
@@ -40,23 +40,9 @@ describe('Header Component', () => {
     expect(registerButton).toBeInTheDocument();
   });
 
-  it('renders logout button when authenticated', () => {
-    render(<Header isAuthenticated={true} />);
-
-    const logoutButton = screen.getByRole('link', { name: /logout/i });
-    expect(logoutButton).toBeInTheDocument();
-
-    expect(
-      screen.queryByRole('link', { name: /login/i })
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByRole('link', { name: /register/i })
-    ).not.toBeInTheDocument();
-  });
-
   it('does not render login button on login page', () => {
     (usePathname as jest.Mock).mockReturnValue('/api/auth/login');
-    render(<Header isAuthenticated={false} />);
+    renderWithCollapseProvider(<Header />);
 
     expect(
       screen.queryByRole('link', { name: /login/i })
@@ -66,7 +52,7 @@ describe('Header Component', () => {
 
   it('does not render register button on register page', () => {
     (usePathname as jest.Mock).mockReturnValue('/api/auth/register');
-    render(<Header isAuthenticated={false} />);
+    renderWithCollapseProvider(<Header />);
 
     expect(screen.getByRole('link', { name: /login/i })).toBeInTheDocument();
     expect(
@@ -75,10 +61,10 @@ describe('Header Component', () => {
   });
 
   it('renders MainNav component', () => {
-    render(<Header isAuthenticated={false} />);
+    renderWithCollapseProvider(<Header />);
 
     // Assuming MainNav renders a nav element
-    const mainNav = screen.getAllByRole('navigation')[0];
+    const mainNav = screen.getByTestId('main-nav');
     expect(mainNav).toBeInTheDocument();
   });
 });

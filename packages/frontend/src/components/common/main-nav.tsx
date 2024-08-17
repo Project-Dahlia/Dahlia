@@ -1,12 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { Logo } from '@/components/logo';
+import { Logo } from '@/components/common/logo';
 import { routes } from '@/config/site';
 
 export function MainNav() {
   return (
-    <div className="flex w-full items-center justify-between">
+    <div
+      className="relative flex h-14 w-full items-center justify-stretch px-2 sm:px-4 lg:px-6"
+      data-testid="main-nav"
+    >
       <div className="flex items-center lg:px-10">
         <Link href="/">
           <Logo alt="site-logo" className="h-10 w-24" />
