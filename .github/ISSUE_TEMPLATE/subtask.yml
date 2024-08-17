@@ -1,0 +1,36 @@
+name: 🛠️ Sub-Task
+description: "Detail the specific sub-task related to a larger feature or issue"
+title: "🛠️ Sub-Task: "
+labels: ["🛠️ sub-task"]
+body:
+  - type: textarea
+    id: task-details
+    validations:
+      required: true
+    attributes:
+      label: "🔧 What is the specific sub-task?"
+      description: "Describe the sub-task clearly and concisely."
+      placeholder: "This sub-task involves ..."
+  - type: textarea
+    id: parent-issue
+    validations:
+      required: true
+    attributes:
+      label: "🔗 Which parent issue or feature does this relate to?"
+      description: "Provide the issue number or title of the parent task/feature."
+      placeholder: "This sub-task is related to issue #..."
+  - type: textarea
+    id: implementation-plan
+    validations:
+      required: true
+    attributes:
+      label: "🛠️ How will you implement this sub-task?"
+      description: "Describe the approach or steps to complete this sub-task."
+      placeholder: "The plan to complete this sub-task is ..."
+  - type: checkboxes
+    id: dependencies
+    attributes:
+      label: "📋 Does this sub-task depend on other tasks?"
+      options:
+        - label: "This sub-task is blocked by other tasks"
+        - label: "This sub-task does not depend on other tasks"
