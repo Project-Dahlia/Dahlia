@@ -60,18 +60,22 @@ describe('Password Reset Functionality', () => {
       .expect('Content-Type', /application\/json/);
 
     expect(response.statusCode).toBe(200);
-    expect(response.body.message).toBe('An email has been sent to testuser@example.com with further instructions.');
+    expect(response.body.message).toBe(
+      'An email has been sent to testuser@example.com with further instructions.'
+    );
     expect(sendMailMock).toHaveBeenCalledTimes(1); // Verify that sendMail was called
   }, 20000);
 
   test('It should reset the password with a valid token and respond with 200 OK', async () => {
-    const user = await User.findOne({ where: { email: "testuser@example.com" } });
+    const user = await User.findOne({
+      where: { email: 'testuser@example.com' }
+    });
     resetToken = user.resetPasswordToken;
 
     const response = await api
       .post('/api/v1/auth/reset-password')
       .send({
-        token: resetToken, 
+        token: resetToken,
         newPassword: 'newpassword123'
       })
       .expect('Content-Type', /application\/json/);
@@ -94,7 +98,9 @@ describe('Password Reset Functionality', () => {
       .expect('Content-Type', /application\/json/);
 
     expect(response.statusCode).toBe(400);
-    expect(response.body.message).toBe('Password reset token is invalid or has expired');
+    expect(response.body.message).toBe(
+      'Password reset token is invalid or has expired'
+    );
   }, 20000);
 
   test('It should respond with 400 Bad Request for expired token', async () => {
@@ -112,6 +118,8 @@ describe('Password Reset Functionality', () => {
       .expect('Content-Type', /application\/json/);
 
     expect(response.statusCode).toBe(400);
-    expect(response.body.message).toBe('Password reset token is invalid or has expired');
+    expect(response.body.message).toBe(
+      'Password reset token is invalid or has expired'
+    );
   }, 20000);
 });

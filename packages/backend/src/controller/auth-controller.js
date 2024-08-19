@@ -208,7 +208,7 @@ const requestPasswordReset = async (req, res) => {
     });
 
     // Send the email with the reset link
-    const resetLink = `${process.env.FRONTEND_URL}/change-password?token=${resetToken}`
+    const resetLink = `${process.env.FRONTEND_URL}/change-password?token=${resetToken}`;
     const mailOptions = {
       to: user.email,
       from: process.env.EMAIL_USER,
@@ -219,7 +219,6 @@ const requestPasswordReset = async (req, res) => {
      
       If you did not request this, please ignore this email and your password will remain unchanged.\n`
     };
-
 
     await transporter.sendMail(mailOptions);
 
