@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dahlia Parking Application
+
+The purpose of the Dahlia project is to address the challenges and frustrations associated with urban parking by providing a seamless and convenient on-demand parking solution for urban dwellers. Dahlia aims to simplify the parking process, enhance user experience, and improve accessibility to parking spaces in congested city centers.
+
+## Tools
+
+This is a Next.js application built with TypeScript, utilizing NextAuth for authentication. The app supports Google OAuth for user authentication.
+
+## Prerequisites
+
+Ensure you have the following installed:
+
+- Node.js (v14.x or later)
+- npm or yarn
+- Google Cloud Console account to obtain OAuth credentials
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Project-Dahlia/Dahlia.git
+cd cd/packages/frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+    npm install
+    # or
+    yarn install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 3. Configure Environment Variables
 
-## Learn More
+Create a .env.local file in the root directory of your project and add the following variables:
 
-To learn more about Next.js, take a look at the following resources:
+    NEXTAUTH_SECRET=your-nextauth-secret
+    NEXTAUTH_URL=http://localhost:3000
+    GOOGLE_CLIENT_ID=your-google-client-id
+    GOOGLE_CLIENT_SECRET=your-google-client-secret
+    NEXTAUTH_JWT_SECRET=your-nextauth-jwt-secret
+    BACKEND_URL=http://localhost:3001
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- NEXTAUTH_SECRET: A secret key for NextAuth session encryption.
+- NEXTAUTH_URL: The base URL of your application (usually http://localhost:3000 in development).
+- GOOGLE_CLIENT_ID: Your Google OAuth Client ID.
+- GOOGLE_CLIENT_SECRET: Your Google OAuth Client Secret.
+- NEXTAUTH_JWT_SECRET: A secret key for signing JSON Web Tokens (JWT).
+- BACKEND_URL: The URL of your backend API or services.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 4. Obtain Google OAuth Credentials
 
-## Deploy on Vercel
+- Go to the Google Cloud Console.
+- Create a new project (or select an existing one).
+- Navigate to APIs & Services > Credentials.
+- Create an OAuth 2.0 Client ID under OAuth consent screen.
+- Add the Authorized redirect URIs for your app: http://localhost:3000/api/auth/callback/google
+- Copy the Client ID and Client Secret and paste them into your .env.local file.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 5. Run the Development Server
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To build and start the production server:
+
+```bash
+    npm run build
+    npm start
+    # or
+    yarn build
+    yarn start
+```
+
+## Contributing
+
+If you'd like to contribute to this project, please fork the repository, create a new branch, and submit a pull request using the contributing template present in the repository.
+
+### License
+
+This project is licensed under the MIT License.
