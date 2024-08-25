@@ -34,6 +34,7 @@ yarn test
 ```
 
 ## Database Setup
+
 To set up a PostgreSQL connection using Sequelize for your backend:
 
 ### 1. Install Sequelize
@@ -48,7 +49,7 @@ npm install --save sequelize
 npm install --save pg pg-hstore
 ```
 
-### 3. Install Sequelize CLI 
+### 3. Install Sequelize CLI
 
 Globally:
 
@@ -69,6 +70,7 @@ npm install sequelize-cli --save-dev
 ```bash
 npx sequelize db:create
 ```
+
 This will create the database specified in your .env file.
 
 ### 6. PostgreSQL Role
@@ -96,10 +98,13 @@ CREATE DATABASE your_db_name WITH OWNER your_db_username;
 ### 8. Verify Existing Databases and Roles
 
 Check Existing Databases:
+
 ```sql
 \l
 ```
+
 Check Existing Roles:
+
 ```sql
 \du
 ```
@@ -107,24 +112,29 @@ Check Existing Roles:
 ### 9. Migrations
 
 Run migration:
+
 ```bash
 npx sequelize db:migrate
 ```
 
 Create a new migration:
+
 ```bash
 npx sequelize migration:generate --name migration-name
 ```
 
 Undo the last migration:
+
 ```bash
 npx sequelize db:migrate:undo
 ```
 
 Undo all migrations:
+
 ```bash
 npx sequelize db:migrate:undo:all
 ```
 
 ### Documentation
+
 Checkout the sequelize documentation for further help - [link](https://sequelize.org/docs/v6/getting-started/)
