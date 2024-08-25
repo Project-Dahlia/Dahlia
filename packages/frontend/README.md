@@ -4,7 +4,7 @@ The purpose of the Dahlia project is to address the challenges and frustrations 
 
 ## Tools
 
-This is a Next.js application built with TypeScript, utilizing NextAuth for authentication. The app supports Google OAuth for user authentication.
+This is a Next.js application built with TypeScript, utilizing NextAuth for authentication. The app supports Google OAuth for user authentication and Leaflet for Maps.
 
 ## Prerequisites
 
