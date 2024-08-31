@@ -38,5 +38,14 @@
   ],
   "dependencies": {
     "nx": "^19.1.0"
-  }
+  },
+  "validate-branch-name": {
+    "rules": {
+      "branch-name": [
+        "error",
+        "always",
+        "^([a-z]+)\\/gh-[0-9]+\\/([a-z0-9\\-]+)$"
+      ]
+    }
+}
 }
