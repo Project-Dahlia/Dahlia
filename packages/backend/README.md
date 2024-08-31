@@ -134,6 +134,7 @@ Undo all migrations:
 ```bash
 npx sequelize db:migrate:undo:all
 ```
+
 ### Documentation
 
 Checkout the sequelize documentation for further help - [link](https://sequelize.org/docs/v6/getting-started/)
