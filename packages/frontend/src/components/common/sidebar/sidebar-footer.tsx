@@ -101,7 +101,7 @@ export function SidebarFooter({
 
       <Button
         className={cn(
-          'hover:bg-primary-50 mb-6 mt-auto h-12 bg-[#F6F8FA] font-semibold text-gray-900',
+          'mb-6 mt-auto h-12 bg-[#F6F8FA] font-semibold text-gray-900 hover:bg-primary',
           !isCollapsed ? 'w-full' : 'w-[47px] p-0'
         )}
         onClick={() => signOut()}
