@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "scripts": {
     "prepare": "npm-run-all --parallel prepare",
-    "prepare:win32": "husky install",
+    "prepare:win32": "husky || true",
     "prepare:unix": "husky install && chmod ug+x .husky/*",
     "start": "cross-env NODE_ENV=production node src/index.js",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
