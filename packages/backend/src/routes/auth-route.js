@@ -146,4 +146,91 @@ router.post('/login', authController.login);
 
 router.post('/google-login', authController.googleLogin);
 
+/**
+ * @swagger
+ * /api/v1/auth/request-password-reset:
+ *   post:
+ *     summary: Request a password reset
+ *     description: Send a password reset link to the user's email.
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: The user's email
+ *             example:
+ *               email: johndoe@example.com
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Password reset link sent
+ *       "400":
+ *         description: Bad Request
+ *       "404":
+ *         description: Not Found
+ *       "500":
+ *         description: Server Error
+ */
+router.post('/request-password-reset', authController.requestPasswordReset);
+
+/**
+ * @swagger
+ * /api/v1/auth/reset-password:
+ *   post:
+ *     summary: Reset password
+ *     description: Reset the user's password using the provided token and new password.
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - token
+ *               - password
+ *             properties:
+ *               token:
+ *                 type: string
+ *                 description: The password reset token
+ *               password:
+ *                 type: string
+ *                 description: The new password
+ *             example:
+ *               token: abcdef123456
+ *               password: newpassword123
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Password reset successful
+ *       "400":
+ *         description: Bad Request
+ *       "404":
+ *         description: Not Found
+ *       "500":
+ *         description: Server Error
+ */
+router.post('/reset-password', authController.resetPassword);
+
 module.exports = router;

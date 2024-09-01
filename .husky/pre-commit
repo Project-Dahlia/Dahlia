@@ -1,16 +1,17 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 # Check changed files between frontend and backend
 
-# If frontend has no changes, no need to run frontend lint-staged
+# If frontend has changes, run frontend lint-staged and validate branch name
 if [ -n "$(git status packages/frontend --porcelain --untracked-files=no)" ]; then
   cd packages/frontend
   npx lint-staged
+  npx validate-branch-name
+  cd -  # Return to the original directory
 fi
 
-# If backend has no changes, no need to run backend lint-staged
+# If backend has changes, run backend lint-staged and validate branch name
 if [ -n "$(git status packages/backend --porcelain --untracked-files=no)" ]; then
   cd packages/backend
   npx lint-staged
+  npx validate-branch-name
+  cd -  # Return to the original directory
 fi
