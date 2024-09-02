@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { ChangePasswordForm } from '@/components/change-password-form';
+import { ChangePasswordForm } from '@/components/auth/change-password-form';
 import { Logo } from '@/components/common/logo';
 import Link from 'next/link';
 
