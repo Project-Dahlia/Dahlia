@@ -1,11 +1,11 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('.database');
+const sequelize = require('../config/config.js');
 
 const ParkingSpot = sequelize.define(
   'ParkingSpot',
   {
     id: {
-      type: DataTypes.STRING, // If `id` is always numeric, consider using DataTypes.INTEGER instead
+      type: DataTypes.STRING,
       primaryKey: true
     },
     slug: {
@@ -17,11 +17,11 @@ const ParkingSpot = sequelize.define(
       allowNull: false
     },
     lat: {
-      type: DataTypes.FLOAT, // Using FLOAT for latitude
+      type: DataTypes.FLOAT,
       allowNull: false
     },
     lng: {
-      type: DataTypes.FLOAT, // Using FLOAT for longitude
+      type: DataTypes.FLOAT,
       allowNull: false
     },
     rate: {
@@ -57,7 +57,7 @@ const ParkingSpot = sequelize.define(
       allowNull: false
     },
     max_height: {
-      type: DataTypes.FLOAT, // Assuming max_height is a decimal value
+      type: DataTypes.FLOAT,
       allowNull: true
     },
     bike_racks: {
@@ -65,15 +65,15 @@ const ParkingSpot = sequelize.define(
       allowNull: false
     },
     payment_methods: {
-      type: DataTypes.ARRAY(DataTypes.STRING), // Storing an array of strings
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false
     },
     payment_options: {
-      type: DataTypes.ARRAY(DataTypes.STRING), // Storing an array of strings
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false
     },
     rate_details: {
-      type: DataTypes.JSON, // Storing the entire rate_details object as JSON
+      type: DataTypes.JSON,
       allowNull: true
     },
     monthly_permit_status: {
