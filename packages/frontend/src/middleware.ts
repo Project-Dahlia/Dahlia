@@ -4,11 +4,13 @@ import { getToken } from 'next-auth/jwt';
 const unauthorizedRoutes = [
   '/api/auth/login',
   '/api/auth/register',
+  'api/auth/reset-password',
   '/api/auth/callback/google',
   '/api/auth/callback/credentials'
 ];
 
 export async function middleware(request: NextRequest) {
+  console.log('Middleware invoked'); // Debug log
   // Check if the current route is in the unauthorizedRoutes list
   if (
     unauthorizedRoutes.some((route) =>

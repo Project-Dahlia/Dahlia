@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { UserAuthForm } from '@/components/user-auth-form';
+import { UserAuthForm } from '@/components/auth/user-auth-form';
 import { usePathname, useRouter } from 'next/navigation';
 import * as authHandlers from '@/lib/handlers/auth-handler';
 import * as googleAuthHandlers from '@/lib/handlers/google-auth-handler';
@@ -41,6 +41,16 @@ describe('UserAuthForm', () => {
     expect(screen.getByPlaceholderText('Name')).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: 'Register' })
+    ).toBeInTheDocument();
+  });
+
+  it('renders the reset password form if pathname is /api/auth/reset-password', () => {
+    (usePathname as jest.Mock).mockReturnValue('/api/auth/reset-password');
+    render(<UserAuthForm />);
+    expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
+    expect(screen.queryByPlaceholderText('Password')).not.toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Request Password Reset Link' })
     ).toBeInTheDocument();
   });
 

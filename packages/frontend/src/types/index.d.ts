@@ -27,3 +27,13 @@ export type SignInPayload = {
 export type RegisterPayload = SignInPayload & {
   name: string;
 };
+
+export type SidebarItem = {
+  href: string;
+  label: string;
+  icon: string;
+};
+
+export type SidebarProps = {
+  toggleSidebar: () => void;
+};

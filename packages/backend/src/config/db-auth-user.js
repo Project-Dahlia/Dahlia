@@ -1,3 +1,5 @@
+//This file creates a Sequelize instance for use in the application code
+
 const { Sequelize } = require('sequelize');
 const config = require('./db-auth-config');
 
