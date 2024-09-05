@@ -80,18 +80,25 @@ yarn test
 
 #### 4. Husky hooks
 
-- In case you are unable to execute husky hooks
+4.1 In case you are unable to execute husky hooks
 
-Use below 2 commands on command line:
+**For macOS and Linux:**
 
 ```bash
 chmod ug+x .husky/*
 chmod ug+x .git/hooks/*
 ```
 
-- In case of the warning message "husky - '~/.huskyrc' is DEPRECATED"
+**For windows:**
+Windows doesn’t have the chmod command, but you typically don’t need to manually change file permissions. If you encounter issues, try:
 
-Use below commands on command line:
+```bash
+git config core.fileMode false
+```
+
+4.2 In case of the warning message "husky - '~/.huskyrc' is DEPRECATED"
+
+**For macOS and Linux:**
 
 ```bash
 mkdir -p ~/.config/husky
@@ -99,15 +106,18 @@ mv ~/.huskyrc ~/.config/husky/init.sh
 npm install -g npm
 ```
 
-- In case of error message "TypeError: args.at is not a function"
+**For windows:**
+No equivalent steps are necessary. Ensure your Node.js and npm are up-to-date.
+
+4.3 In case of error message "TypeError: args.at is not a function"
 
 Usually indicates an issue with the compatibility between the Node.js version and the JavaScript code you are trying to run.
 
 Install NVM if you do not have it already:
+**For macOS and Linux:**
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-
 ```
 
 Install the latest LTS version of Node.js and set the installed version as the default:
@@ -118,6 +128,9 @@ nvm use --lts
 nvm alias default lts/*
 ```
 
+**For windows:**
+Install NVM for Windows from [here](https://github.com/coreybutler/nvm-windows) and follow the instructions to manage Node.js versions.
+
 Verify the installation:
 
 ```bash
@@ -125,16 +138,18 @@ node -v
 npm -v
 ```
 
-- Run Hooks Manually
+4.4 Run Hooks Manually
 
 ```bash
 .husky/pre-commit
+# or
+bash .husky/pre-commit
 ```
 
-- For errors related to branch name or commit message format:
-  Please note: We follow a loose convention for branch names
+4.5 For errors related to branch name or commit message format:
+Please note: We follow a loose convention for branch names
 
-```bash
+```
 [type]/gh-[issue number]/[summary of task]
 
 gh-16/setup-ci-frontend-tests
@@ -143,7 +158,7 @@ docs/gh-16/fix-typos
 
 where `16` is the issue number.
 
-For commit message format checkout -- [link](https://www.conventionalcommits.org/en/v1.0.0/)
+For commit message format checkout - [link](https://www.conventionalcommits.org/en/v1.0.0/)
 
 ### Contributing
 
