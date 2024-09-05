@@ -137,7 +137,6 @@ npm -v
 ```bash
 [type]/gh-[issue number]/[summary of task]
 
-dev
 gh-16/setup-ci-frontend-tests
 docs/gh-16/fix-typos
 ```
