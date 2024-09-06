@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "main": "src/index.js",
   "scripts": {
-    "prepare": "npm-run-all --parallel prepare",
-    "prepare:win32": "husky || true",
-    "prepare:unix": "husky install && chmod ug+x .husky/*",
     "start": "cross-env NODE_ENV=production node src/index.js",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "lint": "eslint . && prettier --check .",
@@ -47,6 +44,7 @@
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
+    "husky": "7.0.4",
     "jest": "^29.7.0",
     "lint-staged": "^15.2.2",
     "nodemon": "^3.1.0",
@@ -54,7 +52,6 @@
     "sequelize-cli": "^6.6.2",
     "supertest": "^6.3.4",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0",
-    "husky": "7.0.4"
+    "swagger-ui-express": "^5.0.0"
   }
 }
