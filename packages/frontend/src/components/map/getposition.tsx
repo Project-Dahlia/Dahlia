@@ -61,7 +61,7 @@ function GetPosition() {
   return (
     <div
       className={cn(
-        'z-[-10] h-[100vh] w-[100vw] transition-all duration-300',
+        'h-screen w-full transition-all duration-300',
         isCollapsed ? 'ml-[87px]' : 'ml-[288px]'
       )}
     >
