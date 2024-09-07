@@ -65,7 +65,7 @@ function Map() {
   return (
     <div
       className={cn(
-        'h-screen w-screen transition-all duration-300',
+        'h-screen w-full transition-all duration-300',
         isCollapsed ? 'ml-[87px]' : 'ml-[288px]'
       )}
     >
