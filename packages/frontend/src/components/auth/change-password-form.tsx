@@ -96,9 +96,7 @@ export function ChangePasswordForm() {
           )}
         />
 
-        <Button type="submit" className="bg-black">
-          Change Password
-        </Button>
+        <Button type="submit">Change Password</Button>
       </form>
     </Form>
   );
