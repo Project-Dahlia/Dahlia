@@ -41,6 +41,6 @@
   },
   "validate-branch-name": {
     "pattern": "^(([a-z]+(-|\\/))|)((gh-|))[0-9]+(-|\\/)[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$",
-    "errorMsg":"Please check README (section: For errors related to branch name or commit message format) to understand how we name our branches."
-}
+    "errorMsg": "Please check README (section: For errors related to branch name or commit message format) to understand how we name our branches."
+  }
 }

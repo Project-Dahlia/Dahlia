@@ -38,25 +38,25 @@ export const Icons = {
       ></path>
     </svg>
   ),
-  parking: ({ ...props }: LucideProps) => (
+  parking: ({ active, ...props }: LucideProps & { active?: boolean }) => (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <path
         d="M18 8.5C19.6569 8.5 21 7.15685 21 5.5C21 3.84315 19.6569 2.5 18 2.5C16.3431 2.5 15 3.84315 15 5.5C15 7.15685 16.3431 8.5 18 8.5Z"
-        stroke="#D0D5DD"
+        stroke={active ? '#000' : '#D0D5DD'}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M6 22.5C7.65685 22.5 9 21.1569 9 19.5C9 17.8431 7.65685 16.5 6 16.5C4.34315 16.5 3 17.8431 3 19.5C3 21.1569 4.34315 22.5 6 22.5Z"
-        stroke="#D0D5DD"
+        stroke={active ? '#000' : '#D0D5DD'}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M12 5.5H8.5C6.567 5.5 5 7.067 5 9C5 10.933 6.567 12.5 8.5 12.5H15.5C17.433 12.5 19 14.067 19 16C19 17.933 17.433 19.5 15.5 19.5H12"
-        stroke="#D0D5DD"
+        stroke={active ? '#000' : '#D0D5DD'}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -259,6 +259,42 @@ export const Icons = {
         fill={fill}
         {...props}
       />
+    </svg>
+  ),
+  price: ({ active, ...props }: LucideProps & { active?: boolean }) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={active ? '#000' : '#D0D5DD'}
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      className="lucide lucide-dollar-sign"
+      {...props}
+    >
+      <line x1="12" x2="12" y1="2" y2="22" />
+      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+    </svg>
+  ),
+  clock: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      className="lucide lucide-clock"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
     </svg>
   )
 };
