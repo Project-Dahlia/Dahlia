@@ -4,6 +4,7 @@ import { useAuth } from '@/lib/hooks/use-auth';
 import { Header } from '@/components/common/site-header';
 import { Sidebar } from '../common/sidebar/sidebar';
 import { useCollapse } from '@/context/collapse-context';
+import { ParkingCardWrapper } from '../common/parking-card/parkcard-wrapper';
 
 export function AuthLayout({ children }: { children: React.ReactNode }) {
   const { isCollapsed, setIsCollapsed } = useCollapse();
@@ -21,7 +22,13 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
       {isAuthenticated && (
         <div className="flex h-screen">
           <Sidebar toggleSidebar={toggleSidebar} />
-          <div className="flex-1">{children}</div>
+          <div className="flex flex-auto overflow-hidden">
+            <div className="flex-auto overflow-hidden">{children}</div>
+
+            <div className="top-0 w-[290px] bg-white">
+              <ParkingCardWrapper />
+            </div>
+          </div>
         </div>
       )}
       {!isAuthenticated && <div>{children}</div>}
