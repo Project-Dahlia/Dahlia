@@ -24,7 +24,6 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
           <Sidebar toggleSidebar={toggleSidebar} />
           <div className="flex flex-auto overflow-hidden">
             <div className="flex-auto overflow-hidden">{children}</div>
-
             <div className="top-0 w-[290px] bg-white">
               <ParkingCardWrapper />
             </div>
