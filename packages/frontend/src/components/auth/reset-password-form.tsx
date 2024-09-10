@@ -29,7 +29,7 @@ export function ResetPasswordForm() {
   const form = useForm<ResetPasswordFormSchema>({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
-      password: '',
+      newPassword: '',
       confirmPassword: ''
     }
   });
@@ -44,7 +44,7 @@ export function ResetPasswordForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
         <FormField
           control={form.control}
-          name="password"
+          name="newPassword"
           render={({ field }) => (
             <FormItem>
               <FormControl>
@@ -56,15 +56,15 @@ export function ResetPasswordForm() {
                   autoCorrect="off"
                   className={cn(
                     'border bg-transparent text-muted-foreground',
-                    form.formState.errors.password && 'border-red-500'
+                    form.formState.errors.newPassword && 'border-red-500'
                   )}
                   {...field}
                 />
               </FormControl>
-              {form.formState.errors.password && (
+              {form.formState.errors.newPassword && (
                 <FormMessage>
                   <p className="text-xs text-red-600">
-                    {form.formState.errors.password?.message}
+                    {form.formState.errors.newPassword?.message}
                   </p>
                 </FormMessage>
               )}

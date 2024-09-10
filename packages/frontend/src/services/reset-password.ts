@@ -3,7 +3,7 @@ import { ResetPasswordFormSchema } from '@/lib/validation/auth';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
-const RESET_PASSWORD_URL = '/api/v1/auth/reset-password';
+const RESET_PASSWORD_URL = `${process.env.FRONTEND_URL}/api/v1/auth/request-password-reset`;
 
 export const createOnSubmit = (
   setError: UseFormSetError<ResetPasswordFormSchema>,
@@ -11,10 +11,10 @@ export const createOnSubmit = (
   router: ReturnType<typeof useRouter>
 ): SubmitHandler<ResetPasswordFormSchema> => {
   return async (data: ResetPasswordFormSchema) => {
-    const { password, confirmPassword } = data;
+    const { newPassword, confirmPassword } = data;
 
     // Check if passwords match
-    if (password !== confirmPassword) {
+    if (newPassword !== confirmPassword) {
       setError('confirmPassword', {
         type: 'manual',
         message: 'Passwords do not match'
@@ -25,7 +25,7 @@ export const createOnSubmit = (
 
     // Ensure token is present
     if (!token) {
-      setError('password', {
+      setError('newPassword', {
         type: 'manual',
         message: 'Invalid or missing token'
       });
@@ -42,7 +42,7 @@ export const createOnSubmit = (
         },
         body: JSON.stringify({
           token,
-          password
+          newPassword
         })
       });
 
@@ -59,7 +59,7 @@ export const createOnSubmit = (
             });
           });
         } else {
-          setError('password', {
+          setError('newPassword', {
             type: 'manual',
             message: result.message || 'Failed to reset the password'
           });
@@ -73,7 +73,7 @@ export const createOnSubmit = (
       router.push('/auth/login');
     } catch (error) {
       console.error('Error during password reset:', error);
-      setError('password', {
+      setError('newPassword', {
         type: 'manual',
         message: 'An unexpected error occurred. Please try again.'
       });
