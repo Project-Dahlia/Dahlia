@@ -1,11 +1,10 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
-import { UserAuthForm } from '@/components/auth/user-auth-form';
+import { ResetPasswordForm } from '@/components/auth/reset-password-form';
 import { Logo } from '@/components/common/logo';
 
 export const metadata: Metadata = {
   title: 'Reset Password',
-  description: 'Reset your password by entering your email below.'
+  description: 'Reset your password.'
 };
 
 export default function ResetPassword() {
@@ -16,24 +15,13 @@ export default function ResetPassword() {
           <header className="reset-header flex flex-col space-y-5 text-center">
             <Logo className="mx-auto h-10 w-24 object-contain" />
             <h1 className="font-subheading text-2xl font-semibold tracking-tight">
-              Forget Password
+              Reset Password
             </h1>
             <p className="text-sm text-muted-foreground">
               Enter password reset email below
             </p>
           </header>
-          <UserAuthForm />
-          <div className="reset-actions bottom-10 flex flex-col pt-40 text-center text-sm text-muted-foreground">
-            <span>
-              Go back to{' '}
-              <Link
-                href="/login"
-                className="hover:text-brand text-blue-600 underline underline-offset-4"
-              >
-                Login
-              </Link>
-            </span>
-          </div>
+          <ResetPasswordForm />
         </div>
       </div>
     </div>
