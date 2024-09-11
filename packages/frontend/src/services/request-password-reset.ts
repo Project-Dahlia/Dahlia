@@ -3,7 +3,7 @@ import { RequestPasswordResetFormSchema } from '@/lib/validation/auth';
 import { toast } from 'sonner';
 
 // URL for backend password reset endpoint
-const PASSWORD_RESET_URL = `${process.env.BACKEND_URL}/api/v1/auth/request-password-reset`;
+const PASSWORD_RESET_URL = `http://localhost:3001/api/v1/auth/request-password-reset`;
 
 export const createOnSubmit = (
   setError: UseFormSetError<RequestPasswordResetFormSchema>

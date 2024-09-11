@@ -3,7 +3,7 @@ import { ResetPasswordFormSchema } from '@/lib/validation/auth';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
-const RESET_PASSWORD_URL = `${process.env.FRONTEND_URL}/api/v1/auth/request-password-reset`;
+const RESET_PASSWORD_URL = `http://localhost:3001/api/v1/auth/reset-password`;
 
 export const createOnSubmit = (
   setError: UseFormSetError<ResetPasswordFormSchema>,
@@ -70,7 +70,7 @@ export const createOnSubmit = (
 
       // Success message and redirection
       toast.success('Your password has been successfully reset');
-      router.push('/auth/login');
+      router.push('/');
     } catch (error) {
       console.error('Error during password reset:', error);
       setError('newPassword', {

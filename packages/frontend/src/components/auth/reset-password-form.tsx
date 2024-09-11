@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter, useSearchParams } from 'next/navigation'; // Import for token retrieval
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -19,7 +19,7 @@ import {
   ResetPasswordFormSchema
 } from '@/lib/validation/auth';
 import { cn } from '@/lib/utils';
-import { createOnSubmit } from '@/services/reset-password'; // Import your submit logic
+import { createOnSubmit } from '@/services/reset-password';
 
 export function ResetPasswordForm() {
   const router = useRouter();
