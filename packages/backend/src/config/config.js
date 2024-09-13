@@ -1,5 +1,4 @@
 // This file is used by the application code for database configuration
-
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3001;
