@@ -25,7 +25,7 @@ export function Header() {
               asChild
               variant="outline"
               size="sm"
-              className="border-gray-400 bg-white px-4 font-bold"
+              className="border-gray-400 bg-white px-4 font-bold text-gray-900"
               aria-label="Login"
             >
               <Link href="/api/auth/login">Login</Link>
@@ -35,7 +35,7 @@ export function Header() {
             <Button
               asChild
               variant="default"
-              className="font-bold sm:px-4 lg:px-6"
+              className="ml-8 sm:px-4 lg:px-6"
               size="sm"
               aria-label="Register"
             >
