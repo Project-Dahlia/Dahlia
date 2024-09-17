@@ -10,9 +10,9 @@
     "format": "prettier --write .",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand --coverage --detectOpenHandles",
     "test:watch": "jest --watch",
-    "db:create": "npx sequelize db:create --config ./config/config.js",
-    "migrate": "npx sequelize-cli db:migrate",
-    "migrate:undo": "npx sequelize-cli db:migrate:undo"
+    "db:create": "npx sequelize db:create --config ./src/config/sequelize-config.js",
+    "migrate": "npx sequelize-cli db:migrate --config ./src/config/sequelize-config.js --models-path ./src/models --migrations-path ./src/migrations",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo --config ./src/config/sequelize-config.js --models-path ./src/models --migrations-path ./src/migrations"
   },
   "lint-staged": {
     "*.{js,json}": [
