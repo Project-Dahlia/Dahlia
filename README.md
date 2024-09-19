@@ -82,7 +82,11 @@ yarn test
 
 4.1 In case you are unable to execute husky hooks
 
+#### 4. Husky Hooks
+
 **For macOS and Linux:**
+
+- In case you are unable to execute Husky hooks:
 
 ```bash
 chmod ug+x .husky/*
