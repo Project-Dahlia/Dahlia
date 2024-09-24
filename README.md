@@ -77,14 +77,15 @@ npm test
 # or
 yarn test
 ```
-#### 4. Husky hooks
-4.1 In case you are unable to execute husky hooks
 
-**For macOS and Linux:**
+#### 4. Husky Hooks
+
+- In case you are unable to execute Husky hooks:
 ```bash
 chmod ug+x .husky/*
 chmod ug+x .git/hooks/*
 ```
+
 **For windows:**
 Windows doesn’t have the chmod command, but you typically don’t need to manually change file permissions. If you encounter issues, try:
 ```bash
@@ -111,7 +112,9 @@ Install NVM if you do not have it already:
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 ```
+
 Install the latest LTS version of Node.js and set the installed version as the default:
+
 ```bash
 nvm install --lts
 nvm use --lts
@@ -121,6 +124,7 @@ nvm alias default lts/*
 Install NVM for Windows from [here](https://github.com/coreybutler/nvm-windows) and follow the instructions to manage Node.js versions.
 
 Verify the installation:
+
 ```bash
 node -v
 npm -v
@@ -133,7 +137,7 @@ bash .husky/pre-commit
 ```
 4.5 For errors related to branch name or commit message format:
 Please note: We follow a loose convention for branch names
-```
+```markdown
 [type]/gh-[issue number]/[summary of task]
 
 gh-16/setup-ci-frontend-tests
