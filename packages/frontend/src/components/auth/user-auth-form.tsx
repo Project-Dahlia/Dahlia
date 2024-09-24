@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Icons } from '@/components/common/icons';
@@ -111,12 +111,7 @@ export function UserAuthForm() {
                   Forget Password?
                 </Link>
               )}
-              <button
-                type="submit"
-                className={cn(buttonVariants(), 'bg-black')}
-              >
-                {isRegister ? 'Register' : 'Login'}
-              </button>
+              <Button type="submit">{isRegister ? 'Register' : 'Login'}</Button>
             </>
           )}
         </div>
@@ -133,17 +128,17 @@ export function UserAuthForm() {
               </span>
             </div>
           </div>
-          <button
+          <Button
             type="button"
             className={cn(
               buttonVariants({ variant: 'outline' }),
-              'bg-transparent text-lg font-bold'
+              'bg-transparent text-lg font-bold text-gray-900'
             )}
             onClick={() => handleGoogleSignIn(setError, router)}
           >
             <Icons.google className="mr-2 h-6 w-6" />
             Google
-          </button>
+          </Button>
         </>
       )}
     </div>

@@ -60,7 +60,7 @@ export function SidebarFooter({
         </Tabs>
       ) : (
         <Toggle
-          className="bg-color-white mb-8 h-[40px] w-[43px] rounded-[6px] border-[2px] border-gray-50 bg-white p-0"
+          className="bg-color-white mb-8 h-[40px] w-[42px] rounded-[6px] border-[1px] border-gray-100 bg-white p-0"
           onClick={() => setActiveTab(activeTab === 'light' ? 'dark' : 'light')}
         >
           {activeTab === 'light' ? (
@@ -101,7 +101,7 @@ export function SidebarFooter({
 
       <Button
         className={cn(
-          'hover:bg-primary-50 mb-6 mt-auto h-12 bg-[#F6F8FA] font-semibold text-gray-900',
+          'hover:bg-primary-100 mb-6 mt-auto h-12 bg-[#F6F8FA] font-semibold text-gray-900',
           !isCollapsed ? 'w-full' : 'w-[47px] p-0'
         )}
         onClick={() => signOut()}
