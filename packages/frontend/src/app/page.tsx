@@ -1,6 +1,6 @@
 'use client';
 
-import Map from '@/components/map/Map';
+import Map from '@/components/map/getposition';
 import React from 'react';
 import { useAuth } from '@/lib/hooks/use-auth'; // Adjust the import path as needed
 
