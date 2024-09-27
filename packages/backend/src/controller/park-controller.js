@@ -2,78 +2,100 @@ const db = require('../models');
 const ParkingSpots = db.ParkingSpots;
 const Op = db.Sequelize.Op;
 
-//Retrieve all ParkingSpots from the database by address
-exports.findAll = (req, res) => {
+const findAll = async (req, res) => {
   const address = req.query.address;
-  let condition = address ? { address: { [Op.iLike]: `%${address}` } } : null;
+  const condition = address
+    ? { address: { [Op.iLike]: `%${address}%` } }
+    : null;
 
-  ParkingSpots.findAll({ where: condition })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message ||
-          'An error occurred while retrieving parking spots. please try again later.'
-      });
+  try {
+    const data = await ParkingSpots.findAll({ where: condition || {} });
+    res.send(data);
+  } catch (err) {
+    res.status(500).send({
+      message:
+        err.message ||
+        'An error occurred while retrieving parking spots. Please try again later.'
     });
+  }
 };
 
-//Find a single parking spot
-exports.findOne = (req, res) => {
+const findOne = async (req, res) => {
   const id = req.params.id;
 
-  ParkingSpots.findByPk(id)
-    .then((data) => {
-      if (data) {
-        res.send(data);
-      } else {
-        res.status(404).send({
-          message: `Cannot find parking spot with id=${id}`
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || 'Error retrieving parking spot'
-      });
+  try {
+    const data = await ParkingSpots.findByPk(id);
+    if (data) {
+      res.send(data);
+    } else {
+      res
+        .status(404)
+        .send({ message: `Cannot find parking spot with id=${id}` });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || 'Error retrieving parking spot'
     });
+  }
 };
 
-//Update a current parking spots by id
-exports.update = (req, res) => {
+const deleteOne = async (req, res) => {
   const id = req.params.id;
 
-  ParkingSpots.destroy({ where: { id: id } })
-    .then((num) => {
-      if (num == 1) {
-        res.send({
-          message: 'parking spot was deleted successfully!'
-        });
-      } else {
-        res.send({
-          message: `Cannot delete parking spot with id=${id}. Maybe parking spot was not found!`
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || 'Could not delete parking spot with id=' + id
+  try {
+    const num = await ParkingSpots.destroy({ where: { id: id } });
+    if (num === 1) {
+      res.send({ message: 'Parking spot was deleted successfully!' });
+    } else {
+      res.send({
+        message: `Cannot delete parking spot with id=${id}. Maybe parking spot was not found!`
       });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || 'Could not delete parking spot with id=' + id
     });
+  }
 };
 
-// Locate all TTC parking
-exports.findAllTtc = (req, res) => {
-  ParkingSpots.findAll({ where: { is_ttc: true } })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || 'An error occurred while retrieving parking spots.'
+const updateSpot = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const num = await ParkingSpots.update(req.body, { where: { id: id } });
+    if (num[0] === 1) {
+      res.send({
+        message: `Parking spot with id=${id} was updated successfully!`
       });
+    } else {
+      res.send({
+        message: `Cannot update parking spot with id=${id}. Maybe parking spot was not found!`
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || 'Error updating parking spot with id=' + id
     });
+  }
+};
+
+const locTtc = async (req, res) => {
+  try {
+    const data = await ParkingSpots.findAll({ where: { is_ttc: true } });
+    res.send(data);
+  } catch (err) {
+    res.status(500).send({
+      message:
+        err.message || 'An error occurred while retrieving parking spots.'
+    });
+  }
+};
+
+module.exports = {
+  addSpot,
+  findAll,
+  findOne,
+  deleteOne,
+  updateSpot,
+  locTtc
 };
