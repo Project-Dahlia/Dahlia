@@ -92,7 +92,6 @@ const locTtc = async (req, res) => {
 };
 
 module.exports = {
-  addSpot,
   findAll,
   findOne,
   deleteOne,
