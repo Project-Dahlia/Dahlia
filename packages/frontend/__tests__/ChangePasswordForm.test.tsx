@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { ChangePasswordForm } from '@/components/change-password-form';
+import { ChangePasswordForm } from '@/components/auth/change-password-form';
 
 describe('ChangePasswordForm', () => {
   beforeEach(() => {

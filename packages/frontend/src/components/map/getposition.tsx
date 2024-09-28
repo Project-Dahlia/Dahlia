@@ -1,15 +1,12 @@
-'use client';
-
 import React, { useEffect, useState, useRef } from 'react';
-import { MapContainer, Marker, TileLayer, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import 'tailwindcss/tailwind.css';
-import { LatLngTuple, Map as LeafletMap } from 'leaflet';
+import L, { LatLngTuple, Map as LeafletMap } from 'leaflet';
 import { useCollapse } from '@/context/collapse-context';
 import { cn } from '@/lib/utils';
-import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'tailwindcss/tailwind.css';
+import Render from './render';
 
-function Map() {
+function GetPosition() {
   const attribute =
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
   const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -46,13 +43,12 @@ function Map() {
     getPosition();
   }, []);
 
+  // Set Leaflet icon assets
   useEffect(() => {
-    // Define a more specific type for the Leaflet Icon prototype
     interface LeafletIconPrototype extends L.Icon.Default {
       _getIconUrl?: (name: string) => string;
     }
 
-    // Use the specific type in the assertion
     delete (L.Icon.Default.prototype as LeafletIconPrototype)._getIconUrl;
 
     L.Icon.Default.mergeOptions({
@@ -65,33 +61,20 @@ function Map() {
   return (
     <div
       className={cn(
-        'h-screen w-screen transition-all duration-300',
+        'z-[-10] h-[100vh] w-[100vw] transition-all duration-300',
         isCollapsed ? 'ml-[87px]' : 'ml-[288px]'
       )}
     >
       {typeof window !== 'undefined' && (
-        <MapContainer
-          ref={mapRef}
-          data-testid="map"
-          className="h-full w-full"
-          center={[51.505, -0.09]}
-          zoom={13}
-          scrollWheelZoom={false}
-        >
-          <TileLayer attribution={attribute} url={url} />
-          {userPosition && (
-            <Marker position={userPosition}>
-              <Popup>
-                Your current location.
-                <br />
-                Easily customizable.
-              </Popup>
-            </Marker>
-          )}
-        </MapContainer>
+        <Render
+          mapRef={mapRef}
+          userPosition={userPosition}
+          attribute={attribute}
+          url={url}
+        />
       )}
     </div>
   );
 }
 
-export default Map;
+export default GetPosition;
