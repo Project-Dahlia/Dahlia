@@ -65,7 +65,7 @@ function Map() {
   return (
     <div
       className={cn(
-        'z-[-10] h-[100vh] w-full transition-all duration-300',
+        'h-[100vh] w-full transition-all duration-300',
         isCollapsed ? 'ml-[87px]' : 'ml-[288px]'
       )}
     >
