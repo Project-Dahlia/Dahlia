@@ -279,5 +279,90 @@ export const Icons = {
         {...props}
       />
     </svg>
+  ),
+  search: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <g clip-path="url(#clip0_514_2384)">
+        <path
+          d="M21 21L16.6569 16.6569M16.6569 16.6569C18.1046 15.2091 19 13.2091 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19C13.2091 19 15.2091 18.1046 16.6569 16.6569Z"
+          stroke="#C4C4C4"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_514_2384">
+          <rect width="24" height="24" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  ),
+  filter: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M21 7L11 7"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle
+        cx="2"
+        cy="2"
+        r="2"
+        transform="matrix(-1 0 0 1 7 5)"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+      />
+      <path
+        d="M3 17L13 17"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="19" cy="17" r="2" stroke="#C4C4C4" strokeWidth="2" />
+    </svg>
+  ),
+  cancel: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  time: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M12 7V12H17M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  location: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M5 9.92285C5 14.7747 9.24448 18.7869 11.1232 20.3252C11.3921 20.5454 11.5281 20.6568 11.7287 20.7132C11.8849 20.7572 12.1148 20.7572 12.271 20.7132C12.472 20.6567 12.6071 20.5463 12.877 20.3254C14.7557 18.7871 18.9999 14.7751 18.9999 9.9233C18.9999 8.08718 18.2625 6.32605 16.9497 5.02772C15.637 3.72939 13.8566 3 12.0001 3C10.1436 3 8.36301 3.7295 7.05025 5.02783C5.7375 6.32616 5 8.08674 5 9.92285Z"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 9C10 10.1046 10.8954 11 12 11C13.1046 11 14 10.1046 14 9C14 7.89543 13.1046 7 12 7C10.8954 7 10 7.89543 10 9Z"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   )
 };

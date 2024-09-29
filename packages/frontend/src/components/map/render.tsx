@@ -1,5 +1,11 @@
 import React from 'react';
-import { MapContainer, Marker, TileLayer, Popup } from 'react-leaflet';
+import {
+  MapContainer,
+  Marker,
+  TileLayer,
+  Popup,
+  ZoomControl
+} from 'react-leaflet';
 import { LatLngTuple, Map as LeafletMap } from 'leaflet';
 
 interface MyMapComponentProps {
@@ -23,8 +29,10 @@ const Render: React.FC<MyMapComponentProps> = ({
       center={[51.505, -0.09]}
       zoom={13}
       scrollWheelZoom={false}
+      zoomControl={false}
     >
       <TileLayer attribution={attribute} url={url} />
+      <ZoomControl position="bottomright" />
       {userPosition && (
         <Marker position={userPosition}>
           <Popup>
