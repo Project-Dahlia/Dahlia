@@ -3,6 +3,7 @@
 import Map from '@/components/map/getposition';
 import React from 'react';
 import { useAuth } from '@/lib/hooks/use-auth'; // Adjust the import path as needed
+import { ParkingCardWrapper } from '@/components/common/parking-card/parkcard-wrapper';
 
 const Home = () => {
   const { isLoading } = useAuth();
@@ -16,8 +17,10 @@ const Home = () => {
   }
 
   return (
-    <main>
-      <Map />
+    <main className="flex h-screen flex-1">
+      <div className="h-full flex-1">
+        <Map />
+      </div>
     </main>
   );
 };
