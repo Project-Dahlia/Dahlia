@@ -17,7 +17,7 @@ import { handleGoogleSignIn } from '@/lib/handlers/google-auth-handler';
 export function UserAuthForm() {
   const pathName = usePathname();
   const isRegister = pathName === '/api/auth/register';
-  const isResetPassword = pathName === '/api/auth/reset-password';
+  const isResetPassword = pathName === '/api/auth/request-password-reset';
   const router = useRouter();
 
   const {
@@ -103,9 +103,9 @@ export function UserAuthForm() {
                   </p>
                 )}
               </div>
-              {!isRegister && (
+              {!isRegister && ( //if it's login then have this option
                 <Link
-                  href="/api/auth/reset-password"
+                  href="/api/auth/request-password-reset"
                   className="text-end text-sm text-blue-600"
                 >
                   Forget Password?
@@ -113,9 +113,6 @@ export function UserAuthForm() {
               )}
               <Button type="submit">{isRegister ? 'Register' : 'Login'}</Button>
             </>
-          )}
-          {isResetPassword && (
-            <Button type="submit">Request Password Reset Link</Button>
           )}
         </div>
       </form>
