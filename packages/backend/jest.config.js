@@ -13,7 +13,7 @@ module.exports = {
     'tests'
   ],
   coverageReporters: ['text', 'lcov', 'clover', 'html'],
-  globalTeardown: './tests/teardown.js',
+  globalTeardown: './__tests__/teardown.js',
   setupFiles: ['dotenv/config'],
   testTimeout: 10000
 };
