@@ -28,13 +28,7 @@ const ClosestParkingSpot = async (id, distance) => {
       type: Sequelize.QueryTypes.SELECT
     });
 
-    if (result.length) {
-      const closestSpot = result[0];
-
-      return closestSpot;
-    } else {
-      return null;
-    }
+    if (result.length) return result[0];
   } catch (error) {
     console.error('Error finding closest parking spot:', error);
     throw error;
