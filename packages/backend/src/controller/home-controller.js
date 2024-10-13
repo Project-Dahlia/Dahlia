@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const Test = require('../../tests/testdb');
+const Test = require('../../__tests__/testdb');
 
 const home = async (req, res) => {
   res.status(httpStatus.OK).send('Home route is working!');
