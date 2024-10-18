@@ -5,6 +5,7 @@ import { Header } from '@/components/common/site-header';
 import { Sidebar } from '../common/sidebar/sidebar';
 import { useCollapse } from '@/context/collapse-context';
 import Search from '../search/search';
+import { ParkingCardWrapper } from '../common/parking-card/parkcard-wrapper';
 
 export function PageLayout({ children }: { children: React.ReactNode }) {
   const { isCollapsed, setIsCollapsed } = useCollapse();
@@ -22,9 +23,12 @@ export function PageLayout({ children }: { children: React.ReactNode }) {
       {isAuthenticated && (
         <div className="flex h-screen">
           <Sidebar toggleSidebar={toggleSidebar} />
-          <div className="relative flex flex-row">
+          <div className="relative flex-auto overflow-hidden">
             <Search isCollapsed={isCollapsed} />
-            <div>{children}</div>
+            {children}
+          </div>
+          <div className="h-full w-[270px] bg-white">
+            <ParkingCardWrapper />
           </div>
         </div>
       )}
