@@ -7,6 +7,9 @@ logs/
 # Miscellaneous
 *.log
 *.env
+.env.example
+.env.development
+.env.test
 
 # dotenv environment variables file
 !.env.example
