@@ -177,8 +177,9 @@ const googleLogin = async (req, res) => {
   }
 };
 
-//Password reset
+//Request password reset
 const requestPasswordReset = async (req, res) => {
+  console.log('Password reset request received');
   const { email } = req.body;
 
   try {
@@ -191,44 +192,70 @@ const requestPasswordReset = async (req, res) => {
         'No user found with that email'
       );
     }
-
     const resetToken = crypto.randomBytes(32).toString('hex');
     const resetTokenExpiry = Date.now() + 3600000; // 1 hour
-
     user.resetPasswordToken = resetToken;
     user.resetPasswordExpires = resetTokenExpiry;
     await user.save();
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD
+    // Generate SMTP service account from ethereal.email
+    nodemailer.createTestAccount((err, account) => {
+      if (err) {
+        console.error('Failed to create a testing account. ' + err.message);
+        return process.exit(1);
       }
+
+      console.log('Credentials obtained, sending message...');
+
+      // Create a SMTP transporter object
+      let transporter = nodemailer.createTransport({
+        host: account.smtp.host,
+        port: account.smtp.port,
+        secure: account.smtp.secure,
+        auth: {
+          user: account.user,
+          pass: account.pass
+        }
+      });
+
+      const resetLink = `${process.env.FRONTEND_URL}/api/auth/reset-password?token=${resetToken}`;
+      // Message object
+      let message = {
+        to: user.email,
+        from: 'help@dahlia.com',
+        subject: 'Password Reset',
+        html: `
+            <p>You are receiving this because you have requested the reset of the password for your account.</p>
+            <p>Please click on the following link, or paste this into your browser to complete the process:</p>
+            <p><a href="${resetLink}" target="_blank">Reset your password here</a></p><br>
+
+            <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
+
+            <p>Best Regards,<p>
+            <p>Contact support Dahlia<p>
+            `
+      };
+
+      transporter.sendMail(message, (err, info) => {
+        if (err) {
+          console.log('Error occurred. ' + err.message);
+          return process.exit(1);
+        }
+
+        console.log('Reset email sent successfully');
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+        responseWrapper(
+          res,
+          httpStatus.OK,
+          {},
+          'An email has been sent to ' +
+            user.email +
+            ' with further instructions.'
+        );
+      });
     });
-
-    // Send the email with the reset link
-    const resetLink = `${process.env.FRONTEND_URL}/change-password?token=${resetToken}`;
-    const mailOptions = {
-      to: user.email,
-      from: process.env.EMAIL_USER,
-      subject: 'Password Reset',
-      text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
-      Please click on the following link, or paste this into your browser to complete the process:\n\n
-      ${resetLink}\n\n
-     
-      If you did not request this, please ignore this email and your password will remain unchanged.\n`
-    };
-
-    await transporter.sendMail(mailOptions);
-
-    responseWrapper(
-      res,
-      httpStatus.OK,
-      {},
-      'An email has been sent to ' + user.email + ' with further instructions.'
-    );
   } catch (error) {
+    console.error('Error sending reset email:', error);
     responseWrapper(
       res,
       httpStatus.INTERNAL_SERVER_ERROR,
@@ -241,6 +268,7 @@ const requestPasswordReset = async (req, res) => {
 const resetPassword = async (req, res) => {
   const token = req.body['token'];
   const password = req.body['newPassword'];
+  console.log('token', token);
 
   try {
     const user = await User.findOne({
@@ -265,6 +293,53 @@ const resetPassword = async (req, res) => {
     user.resetPasswordToken = null;
     user.resetPasswordExpires = null;
     await user.save();
+
+    // Generate SMTP service account from ethereal.email
+    nodemailer.createTestAccount((err, account) => {
+      if (err) {
+        console.error('Failed to create a testing account. ' + err.message);
+        return process.exit(1);
+      }
+
+      console.log('Credentials obtained, sending message...');
+
+      // Create a SMTP transporter object
+      let transporter = nodemailer.createTransport({
+        host: account.smtp.host,
+        port: account.smtp.port,
+        secure: account.smtp.secure,
+        auth: {
+          user: account.user,
+          pass: account.pass
+        }
+      });
+
+      const loginLink = `${process.env.FRONTEND_URL}/api/auth/login`;
+      // Message object for confirmation email
+      let message = {
+        to: user.email,
+        from: 'help@dahlia.com',
+        subject: 'Password Reset Successful!',
+        html: `Congratulations! Your password has been changed successfully.<br><br>
+        Please try logging in again with your new password using the following link:<br><br>
+        <a href="${loginLink}" target="_blank">Login here</a><br><br>
+
+        <p>Best Regards<p>
+        <p>Contact support Dahlia<p>
+        `
+      };
+
+      // Send email
+      transporter.sendMail(message, (err, info) => {
+        if (err) {
+          console.log('Error occurred while sending email: ' + err.message);
+          return process.exit(1);
+        }
+
+        console.log('Password reset confirmation email sent successfully');
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+      });
+    });
 
     responseWrapper(
       res,

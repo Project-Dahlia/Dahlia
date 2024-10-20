@@ -19,7 +19,6 @@ export const createOnSubmit = (
         email: data.email,
         password: data.password
       };
-
       // Conditionally extend the payload for registration
       const payload: SignInPayload | RegisterPayload = isRegister
         ? { ...basePayload, name: data.name }

@@ -17,6 +17,8 @@ export const userAuthSchema = z.object({
     .min(6, { message: 'Password must be at least 6 characters.' })
 });
 
+export type FormSchema = z.infer<typeof userAuthSchema>;
+
 export const changePasswordSchema = z
   .object({
     password: z.string().min(6, 'Password must be at least 6 characters'),
@@ -29,4 +31,20 @@ export const changePasswordSchema = z
 
 export type ChangePasswordFormSchema = z.infer<typeof changePasswordSchema>;
 
-export type FormSchema = z.infer<typeof userAuthSchema>;
+export const requestPasswordResetSchema = z.object({
+  email: z
+    .string({ required_error: 'Email is required for registration.' })
+    .min(1, { message: required_error })
+    .email({ message: 'Please provide a valid email.' })
+});
+
+export type RequestPasswordResetFormSchema = z.infer<
+  typeof requestPasswordResetSchema
+>;
+
+export const resetPasswordSchema = z.object({
+  newPassword: z.string().min(6, 'Password must be at least 6 characters'),
+  confirmPassword: z.string()
+});
+
+export type ResetPasswordFormSchema = z.infer<typeof resetPasswordSchema>;

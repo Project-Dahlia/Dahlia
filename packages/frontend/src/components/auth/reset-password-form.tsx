@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -14,31 +15,36 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import {
-  changePasswordSchema,
-  ChangePasswordFormSchema
+  resetPasswordSchema,
+  ResetPasswordFormSchema
 } from '@/lib/validation/auth';
 import { cn } from '@/lib/utils';
+import { createOnSubmit } from '@/services/reset-password';
 
-export function ChangePasswordForm() {
-  const form = useForm<ChangePasswordFormSchema>({
-    resolver: zodResolver(changePasswordSchema),
+export function ResetPasswordForm() {
+  const router = useRouter();
+  const searchParams = useSearchParams(); // To get token from URL
+  const token = searchParams.get('token'); // Extract the token from query string
+
+  const form = useForm<ResetPasswordFormSchema>({
+    resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
-      password: '',
+      newPassword: '',
       confirmPassword: ''
     }
   });
 
-  const onSubmit = (data: ChangePasswordFormSchema) => {
-    // handle form submission
-    console.log(data);
-  };
+  const { handleSubmit, setError } = form;
+
+  // Pass the token to the submit logic
+  const onSubmit = createOnSubmit(setError, token, router);
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
         <FormField
           control={form.control}
-          name="password"
+          name="newPassword"
           render={({ field }) => (
             <FormItem>
               <FormControl>
@@ -49,16 +55,16 @@ export function ChangePasswordForm() {
                   autoCapitalize="none"
                   autoCorrect="off"
                   className={cn(
-                    'border',
-                    form.formState.errors.password && 'border-red-500'
+                    'border bg-transparent text-muted-foreground',
+                    form.formState.errors.newPassword && 'border-red-500'
                   )}
                   {...field}
                 />
               </FormControl>
-              {form.formState.errors.password && (
+              {form.formState.errors.newPassword && (
                 <FormMessage>
                   <p className="text-xs text-red-600">
-                    {form.formState.errors.password?.message}
+                    {form.formState.errors.newPassword?.message}
                   </p>
                 </FormMessage>
               )}
@@ -79,7 +85,7 @@ export function ChangePasswordForm() {
                   autoCapitalize="none"
                   autoCorrect="off"
                   className={cn(
-                    'border',
+                    'border bg-transparent text-muted-foreground',
                     form.formState.errors.confirmPassword && 'border-red-500'
                   )}
                   {...field}
@@ -97,7 +103,7 @@ export function ChangePasswordForm() {
         />
 
         <Button type="submit" className="bg-black">
-          Change Password
+          Reset Password
         </Button>
       </form>
     </Form>
