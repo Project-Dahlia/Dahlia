@@ -6,7 +6,7 @@ import '@/styles/globals.css';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/config/site';
 import { AuthProvider } from '../context/auth-provider';
-import { AuthLayout } from '@/components/layout/auth-layout';
+import { PageLayout } from '@/components/layout/page-layout';
 import { CollapseProvider } from '@/context/collapse-context';
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function RootLayout({
         {/* <StoreProvider> */}
         <AuthProvider>
           <CollapseProvider>
-            <AuthLayout>{children}</AuthLayout>
+            <PageLayout>{children}</PageLayout>
           </CollapseProvider>
         </AuthProvider>
         {/* </StoreProvider> */}

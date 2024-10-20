@@ -10,26 +10,16 @@ export const getInitials = (firstName: string, lastName: string): string => {
 export const getIconClassNames = (
   routeHref: string,
   isCollapsed: boolean,
-  isPath: (path: string) => boolean,
-  strokePaths: string[],
-  fillPaths: string[]
+  isPath: (path: string) => boolean
 ): string => {
   let classNames = 'h-6 w-6';
 
   if (isCollapsed) {
-    if (strokePaths.includes(routeHref)) {
-      classNames += ' stroke-gray-900';
-    } else if (fillPaths.includes(routeHref)) {
-      classNames += ' fill-gray-900';
-    }
+    classNames += ' stroke-gray-900';
   }
 
   if (isPath(routeHref)) {
-    if (fillPaths.includes(routeHref)) {
-      classNames += ' fill-white';
-    } else if (strokePaths.includes(routeHref)) {
-      classNames += ' stroke-white';
-    }
+    classNames += ' stroke-black';
   }
 
   return classNames;

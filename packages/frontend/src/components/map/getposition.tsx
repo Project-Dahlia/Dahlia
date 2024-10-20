@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import L, { LatLngTuple, Map as LeafletMap } from 'leaflet';
 import { useCollapse } from '@/context/collapse-context';
 import { cn } from '@/lib/utils';
@@ -61,8 +61,8 @@ function GetPosition() {
   return (
     <div
       className={cn(
-        'z-[-10] h-[100vh] transition-all duration-300',
-        isCollapsed ? 'ml-[87px]' : 'ml-[288px]'
+        'pointer-events-auto absolute top-0 z-[-5] h-[100vh] w-[100vw] transition-all duration-300',
+        isCollapsed ? 'left-[87px]' : 'left-[288px]'
       )}
     >
       {typeof window !== 'undefined' && (
