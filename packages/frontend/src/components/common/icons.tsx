@@ -38,7 +38,7 @@ export const Icons = {
       ></path>
     </svg>
   ),
-  parking: ({ active, ...props }: LucideProps & { active?: boolean }) => (
+  parking: ({ active, ...props }: IconProps & { active?: boolean }) => (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <path
         d="M18 8.5C19.6569 8.5 21 7.15685 21 5.5C21 3.84315 19.6569 2.5 18 2.5C16.3431 2.5 15 3.84315 15 5.5C15 7.15685 16.3431 8.5 18 8.5Z"
@@ -46,6 +46,7 @@ export const Icons = {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        {...props}
       />
       <path
         d="M6 22.5C7.65685 22.5 9 21.1569 9 19.5C9 17.8431 7.65685 16.5 6 16.5C4.34315 16.5 3 17.8431 3 19.5C3 21.1569 4.34315 22.5 6 22.5Z"
@@ -53,6 +54,7 @@ export const Icons = {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        {...props}
       />
       <path
         d="M12 5.5H8.5C6.567 5.5 5 7.067 5 9C5 10.933 6.567 12.5 8.5 12.5H15.5C17.433 12.5 19 14.067 19 16C19 17.933 17.433 19.5 15.5 19.5H12"
@@ -60,6 +62,7 @@ export const Icons = {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        {...props}
       />
     </svg>
   ),
@@ -279,7 +282,7 @@ export const Icons = {
   ),
   search: (props: IconProps) => (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <g clip-path="url(#clip0_514_2384)">
+      <g clipPath="url(#clip0_514_2384)">
         <path
           d="M21 21L16.6569 16.6569M16.6569 16.6569C18.1046 15.2091 19 13.2091 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19C13.2091 19 15.2091 18.1046 16.6569 16.6569Z"
           stroke="#C4C4C4"
@@ -370,9 +373,9 @@ export const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke={active ? '#000' : '#D0D5DD'}
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-dollar-sign"
       {...props}
     >
@@ -388,9 +391,9 @@ export const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-clock"
       {...props}
     >
@@ -406,9 +409,9 @@ export const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-credit-card"
       {...props}
     >
@@ -424,9 +427,9 @@ export const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-bike"
       {...props}
     >
@@ -444,9 +447,9 @@ export const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-car-front"
       {...props}
     >
@@ -466,9 +469,9 @@ export const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-zap"
       {...props}
     >

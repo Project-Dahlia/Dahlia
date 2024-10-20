@@ -32,7 +32,7 @@ const Render: React.FC<MyMapComponentProps> = ({
       zoomControl={false}
     >
       <TileLayer attribution={attribute} url={url} />
-      <ZoomControl position="bottomright" />
+      <ZoomControl position="bottomleft" />
       {userPosition && (
         <Marker position={userPosition}>
           <Popup>

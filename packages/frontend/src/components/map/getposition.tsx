@@ -61,7 +61,7 @@ function GetPosition() {
   return (
     <div
       className={cn(
-        'absolute  top-0 z-[-100] h-[100vh] w-[100vw] transition-all duration-300',
+        'pointer-events-auto absolute top-0 z-[-5] h-[100vh] w-[100vw] transition-all duration-300',
         isCollapsed ? 'left-[87px]' : 'left-[288px]'
       )}
     >

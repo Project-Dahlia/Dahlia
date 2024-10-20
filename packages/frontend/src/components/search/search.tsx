@@ -24,7 +24,7 @@ const Search = ({ isCollapsed }: SearchProps) => {
   return (
     <div
       className={cn(
-        'transition-width absolute left-0 top-0 z-10 ml-4 flex h-full flex-col items-start px-4 pt-4 duration-300',
+        'transition-width absolute left-0 top-0 z-20 ml-4 flex h-full flex-col items-start px-4 pt-4 duration-300',
         isCollapsed ? 'ml-[87px]' : 'ml-[288px]',
         showFilter ? 'border-l-2 border-[#d9d9d9] bg-white' : ''
       )}

@@ -7,32 +7,43 @@ import { useCollapse } from '@/context/collapse-context';
 import Search from '../search/search';
 import { ParkingCardWrapper } from '../common/parking-card/parkcard-wrapper';
 
-export function PageLayout({ children }: { children: React.ReactNode }) {
-  const { isCollapsed, setIsCollapsed } = useCollapse();
+interface PageLayoutProps {
+  children: React.ReactNode;
+}
 
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+export function PageLayout({ children }: PageLayoutProps) {
+  const { isCollapsed, setIsCollapsed } = useCollapse();
   const { isAuthenticated, isLoading } = useAuth();
+
+  const toggleSidebar = () => setIsCollapsed(!isCollapsed);
 
   if (isLoading) return <div>Loading...</div>;
 
+  if (!isAuthenticated) {
+    return (
+      <>
+        <Header />
+        <div>{children}</div>
+      </>
+    );
+  }
+
   return (
-    <>
-      {!isAuthenticated && <Header />}
-      {isAuthenticated && (
-        <div className="flex h-screen">
-          <Sidebar toggleSidebar={toggleSidebar} />
-          <div className="relative flex-auto overflow-hidden">
-            <Search isCollapsed={isCollapsed} />
-            {children}
-          </div>
-          <div className="h-full w-[270px] bg-white">
-            <ParkingCardWrapper />
-          </div>
-        </div>
-      )}
-      {!isAuthenticated && <div>{children}</div>}
-    </>
+    <div className="flex h-screen overflow-hidden">
+      {/* Sidebar with z-index to ensure it's above other elements */}
+      <div className={`relative z-20`}>
+        <Sidebar toggleSidebar={toggleSidebar} />
+      </div>
+
+      {/* Main content area */}
+      <div className="relative z-10 flex-auto bg-gray-100">
+        <Search isCollapsed={isCollapsed} />
+        {children}
+      </div>
+      {/* Right-side parking card */}
+      <div className="z-10 h-full w-[270px] bg-white">
+        <ParkingCardWrapper />
+      </div>
+    </div>
   );
 }
