@@ -24,7 +24,7 @@ export function SidebarHeader({
           )}
         >
           <Icons.logo className="h-7 w-7" />
-          <div className="ml-2 text-lg font-bold text-primary">Dahlia_</div>
+          <div className="ml-2 text-lg font-bold ">Dahlia_</div>
         </Link>
       )}
       <Button

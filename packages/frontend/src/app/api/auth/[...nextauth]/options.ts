@@ -6,7 +6,6 @@ import {
   registerWithCredentials,
   signInWithGoogle
 } from '@/lib/auth';
-import { JWT } from 'next-auth/jwt';
 import { IUserData } from '@/types/next-auth';
 
 export const options: NextAuthOptions = {

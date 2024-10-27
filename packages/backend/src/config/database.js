@@ -5,11 +5,11 @@ const config = require('./sequelize-config');
 
 // Sequelize configuration
 const sequelize = new Sequelize({
-  database: config.DB_NAME,
-  username: config.DB_USER,
-  password: config.DB_PASSWORD,
-  host: config.DB_HOST,
-  port: config.DB_PORT,
+  database: config.database,
+  username: config.username,
+  password: config.password,
+  host: config.host,
+  port: config.port,
   dialect: 'postgres',
   pool: {
     max: 64,
@@ -25,9 +25,9 @@ const checkConnection = async () => {
 
     await sequelize.sync({ force: false });
 
-    console.log(`${config.DB_NAME} DB Connected and synced `);
+    console.log(`${config.database} DB Connected and synced `);
   } catch (error) {
-    console.log(`Unable to connect to the ${config.DB_NAME} database`, error);
+    console.log(`Unable to connect to the ${config.database} database`, error);
   }
 };
 

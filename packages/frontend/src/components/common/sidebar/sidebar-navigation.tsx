@@ -16,8 +16,6 @@ export function SidebarNavigation({
 }: SidebarNavigationProps): JSX.Element {
   const isPath = (path: string): boolean =>
     pathname === path || pathname.startsWith(path);
-  const strokePaths = ['/auth'];
-  const fillPaths = ['/auth'];
 
   return (
     <nav className="flex-1 overflow-y-auto">
@@ -29,8 +27,6 @@ export function SidebarNavigation({
             route={route}
             isPath={isPath}
             isCollapsed={isCollapsed}
-            strokePaths={strokePaths}
-            fillPaths={fillPaths}
           />
         ))}
         <Separator className="border-gray-100" />

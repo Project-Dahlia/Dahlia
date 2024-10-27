@@ -1,5 +1,5 @@
 const app = require('./app');
-const config = require('./config/config');
+const config = require('./config/sequelize-config');
 
 // Start the Express app
 app.listen(config.PORT, () => {

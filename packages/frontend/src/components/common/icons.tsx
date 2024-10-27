@@ -38,7 +38,7 @@ export const Icons = {
       ></path>
     </svg>
   ),
-  parking: ({ active, ...props }: LucideProps & { active?: boolean }) => (
+  parking: ({ active, ...props }: IconProps & { active?: boolean }) => (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <path
         d="M18 8.5C19.6569 8.5 21 7.15685 21 5.5C21 3.84315 19.6569 2.5 18 2.5C16.3431 2.5 15 3.84315 15 5.5C15 7.15685 16.3431 8.5 18 8.5Z"
@@ -46,6 +46,7 @@ export const Icons = {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        {...props}
       />
       <path
         d="M6 22.5C7.65685 22.5 9 21.1569 9 19.5C9 17.8431 7.65685 16.5 6 16.5C4.34315 16.5 3 17.8431 3 19.5C3 21.1569 4.34315 22.5 6 22.5Z"
@@ -53,6 +54,7 @@ export const Icons = {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        {...props}
       />
       <path
         d="M12 5.5H8.5C6.567 5.5 5 7.067 5 9C5 10.933 6.567 12.5 8.5 12.5H15.5C17.433 12.5 19 14.067 19 16C19 17.933 17.433 19.5 15.5 19.5H12"
@@ -60,30 +62,34 @@ export const Icons = {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        {...props}
       />
     </svg>
   ),
-  events: ({ ...props }: LucideProps) => (
+  events: ({ ...props }: IconProps) => (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <path
         d="M18.6161 20.5H19.1063C20.2561 20.5 21.1707 19.9761 21.9919 19.2436C24.078 17.3826 19.1741 15.5 17.5 15.5M15.5 5.56877C15.7271 5.52373 15.9629 5.5 16.2048 5.5C18.0247 5.5 19.5 6.84315 19.5 8.5C19.5 10.1568 18.0247 11.5 16.2048 11.5C15.9629 11.5 15.7271 11.4763 15.5 11.4312"
         stroke="#D0D5DD"
         strokeWidth="1.5"
         strokeLinecap="round"
+        {...props}
       />
       <path
         d="M4.48131 16.6112C3.30234 17.243 0.211139 18.5331 2.09388 20.1474C3.01359 20.936 4.03791 21.5 5.32572 21.5H12.6743C13.9621 21.5 14.9864 20.936 15.9061 20.1474C17.7889 18.5331 14.6977 17.243 13.5187 16.6112C10.754 15.1296 7.24599 15.1296 4.48131 16.6112Z"
         stroke="#D0D5DD"
         strokeWidth="1.5"
+        {...props}
       />
       <path
         d="M13 8C13 10.2091 11.2091 12 9 12C6.79086 12 5 10.2091 5 8C5 5.79086 6.79086 4 9 4C11.2091 4 13 5.79086 13 8Z"
         stroke="#D0D5DD"
         strokeWidth="1.5"
+        {...props}
       />
     </svg>
   ),
-  insights: ({ ...props }: LucideProps) => (
+  insights: ({ ...props }: IconProps) => (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <path
         d="M12 22.5L10 16.5H2L4 22.5H12ZM12 22.5H16"
@@ -91,6 +97,7 @@ export const Icons = {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        {...props}
       />
       <path
         d="M12 13.5V13C12 11.1144 12 10.1716 11.4142 9.58579C10.8284 9 9.88562 9 8 9C6.11438 9 5.17157 9 4.58579 9.58579C4 10.1716 4 11.1144 4 13V13.5"
@@ -98,26 +105,30 @@ export const Icons = {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        {...props}
       />
       <path
         d="M19 13.5C19 14.6046 18.1046 15.5 17 15.5C15.8954 15.5 15 14.6046 15 13.5C15 12.3954 15.8954 11.5 17 11.5C18.1046 11.5 19 12.3954 19 13.5Z"
         stroke="#D0D5DD"
         strokeWidth="1.5"
+        {...props}
       />
       <path
         d="M10 4.5C10 5.60457 9.10457 6.5 8 6.5C6.89543 6.5 6 5.60457 6 4.5C6 3.39543 6.89543 2.5 8 2.5C9.10457 2.5 10 3.39543 10 4.5Z"
         stroke="#D0D5DD"
         strokeWidth="1.5"
+        {...props}
       />
       <path
         d="M14 18H20C21.1046 18 22 18.8954 22 20V20.5C22 21.6046 21.1046 22.5 20 22.5H19"
         stroke="#D0D5DD"
         strokeWidth="1.5"
         strokeLinecap="round"
+        {...props}
       />
     </svg>
   ),
-  notifications: ({ ...props }: LucideProps) => (
+  notifications: ({ ...props }: IconProps) => (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <path
         d="M2.52992 14.7696C2.31727 16.1636 3.268 17.1312 4.43205 17.6134C8.89481 19.4622 15.1052 19.4622 19.5679 17.6134C20.732 17.1312 21.6827 16.1636 21.4701 14.7696C21.3394 13.9129 20.6932 13.1995 20.2144 12.5029C19.5873 11.5793 19.525 10.5718 19.5249 9.5C19.5249 5.35786 16.1559 2 12 2C7.84413 2 4.47513 5.35786 4.47513 9.5C4.47503 10.5718 4.41272 11.5793 3.78561 12.5029C3.30684 13.1995 2.66061 13.9129 2.52992 14.7696Z"
@@ -125,6 +136,7 @@ export const Icons = {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        {...props}
       />
       <path
         d="M8 19C8.45849 20.7252 10.0755 22 12 22C13.9245 22 15.5415 20.7252 16 19"
@@ -132,35 +144,40 @@ export const Icons = {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        {...props}
       />
     </svg>
   ),
-  settings: ({ ...props }: LucideProps) => (
+  settings: ({ ...props }: IconProps) => (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <path
         d="M14.9527 2H9.04738V4.58152L7.15473 5.69367L4.95267 4.40192L2 9.59808L4.20152 10.8895L4.20153 13.1106L2.0001 14.4019L4.95277 19.5981L7.15477 18.3064L9.04738 19.4185V22H14.9527V19.4185L16.8453 18.3064L19.0472 19.5981L21.9999 14.4019L19.7986 13.1106V10.8894L22 9.59808L19.0473 4.40192L16.8453 5.69363L14.9527 4.58152V2Z"
         stroke="#D0D5DD"
         strokeWidth="1.5"
         strokeLinejoin="round"
+        {...props}
       />
       <path
         d="M15.5 12C15.5 13.933 13.933 15.5 12 15.5C10.067 15.5 8.5 13.933 8.5 12C8.5 10.067 10.067 8.5 12 8.5C13.933 8.5 15.5 10.067 15.5 12Z"
         stroke="#D0D5DD"
         strokeWidth="1.5"
+        {...props}
       />
     </svg>
   ),
-  support: ({ ...props }: LucideProps) => (
+  support: ({ ...props }: IconProps) => (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <path
         d="M17 10.8045C17 10.4588 17 10.286 17.052 10.132C17.2032 9.68444 17.6018 9.51076 18.0011 9.32888C18.45 9.12442 18.6744 9.02219 18.8968 9.0042C19.1493 8.98378 19.4022 9.03818 19.618 9.15929C19.9041 9.31984 20.1036 9.62493 20.3079 9.87302C21.2513 11.0188 21.7229 11.5918 21.8955 12.2236C22.0348 12.7334 22.0348 13.2666 21.8955 13.7764C21.6438 14.6979 20.8485 15.4704 20.2598 16.1854C19.9587 16.5511 19.8081 16.734 19.618 16.8407C19.4022 16.9618 19.1493 17.0162 18.8968 16.9958C18.6744 16.9778 18.45 16.8756 18.0011 16.6711C17.6018 16.4892 17.2032 16.3156 17.052 15.868C17 15.714 17 15.5412 17 15.1955V10.8045Z"
         stroke="#D0D5DD"
         strokeWidth="1.5"
+        {...props}
       />
       <path
         d="M7 10.8046C7 10.3694 6.98778 9.97821 6.63591 9.6722C6.50793 9.5609 6.33825 9.48361 5.99891 9.32905C5.55001 9.12458 5.32556 9.02235 5.10316 9.00436C4.43591 8.9504 4.07692 9.40581 3.69213 9.87318C2.74875 11.019 2.27706 11.5919 2.10446 12.2237C1.96518 12.7336 1.96518 13.2668 2.10446 13.7766C2.3562 14.6981 3.15152 15.4705 3.74021 16.1856C4.11129 16.6363 4.46577 17.0475 5.10316 16.996C5.32556 16.978 5.55001 16.8757 5.99891 16.6713C6.33825 16.5167 6.50793 16.4394 6.63591 16.3281C6.98778 16.0221 7 15.631 7 15.1957V10.8046Z"
         stroke="#D0D5DD"
         strokeWidth="1.5"
+        {...props}
       />
       <path
         d="M5 9C5 5.68629 8.13401 3 12 3C15.866 3 19 5.68629 19 9"
@@ -168,6 +185,7 @@ export const Icons = {
         strokeWidth="1.5"
         strokeLinecap="square"
         strokeLinejoin="round"
+        {...props}
       />
       <path
         d="M19 17V17.8C19 19.5673 17.2091 21 15 21H13"
@@ -175,6 +193,7 @@ export const Icons = {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        {...props}
       />
     </svg>
   ),
@@ -261,6 +280,91 @@ export const Icons = {
       />
     </svg>
   ),
+  search: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <g clipPath="url(#clip0_514_2384)">
+        <path
+          d="M21 21L16.6569 16.6569M16.6569 16.6569C18.1046 15.2091 19 13.2091 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19C13.2091 19 15.2091 18.1046 16.6569 16.6569Z"
+          stroke="#C4C4C4"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_514_2384">
+          <rect width="24" height="24" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  ),
+  filter: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M21 7L11 7"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle
+        cx="2"
+        cy="2"
+        r="2"
+        transform="matrix(-1 0 0 1 7 5)"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+      />
+      <path
+        d="M3 17L13 17"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="19" cy="17" r="2" stroke="#C4C4C4" strokeWidth="2" />
+    </svg>
+  ),
+  cancel: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  time: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M12 7V12H17M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  location: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M5 9.92285C5 14.7747 9.24448 18.7869 11.1232 20.3252C11.3921 20.5454 11.5281 20.6568 11.7287 20.7132C11.8849 20.7572 12.1148 20.7572 12.271 20.7132C12.472 20.6567 12.6071 20.5463 12.877 20.3254C14.7557 18.7871 18.9999 14.7751 18.9999 9.9233C18.9999 8.08718 18.2625 6.32605 16.9497 5.02772C15.637 3.72939 13.8566 3 12.0001 3C10.1436 3 8.36301 3.7295 7.05025 5.02783C5.7375 6.32616 5 8.08674 5 9.92285Z"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 9C10 10.1046 10.8954 11 12 11C13.1046 11 14 10.1046 14 9C14 7.89543 13.1046 7 12 7C10.8954 7 10 7.89543 10 9Z"
+        stroke="#C4C4C4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
   price: ({ active, ...props }: LucideProps & { active?: boolean }) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -269,9 +373,9 @@ export const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke={active ? '#000' : '#D0D5DD'}
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-dollar-sign"
       {...props}
     >
@@ -287,9 +391,9 @@ export const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-clock"
       {...props}
     >
@@ -305,9 +409,9 @@ export const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-credit-card"
       {...props}
     >
@@ -323,9 +427,9 @@ export const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-bike"
       {...props}
     >
@@ -343,9 +447,9 @@ export const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-car-front"
       {...props}
     >
@@ -365,9 +469,9 @@ export const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="lucide lucide-zap"
       {...props}
     >
