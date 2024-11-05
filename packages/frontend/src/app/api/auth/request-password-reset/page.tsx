@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
-import { ResetPasswordForm } from '@/components/auth/reset-password-form';
+import { RequestPasswordResetForm } from '@/components/auth/request-password-reset-form';
 import { Logo } from '@/components/common/logo';
 
 export const metadata: Metadata = {
-  title: 'Reset Password',
-  description: 'Reset your password.'
+  title: 'Request Password Reset',
+  description: 'Request a link to reset your password.'
 };
 
-export default function ResetPassword() {
+export default function RequestPasswordReset() {
   return (
     <div className="reset-container container my-10 flex flex-col items-center justify-center">
       <div className="reset-card min-h-[636px] w-full rounded-lg border bg-white py-14 md:max-w-md">
@@ -18,10 +18,10 @@ export default function ResetPassword() {
               Reset Password
             </h1>
             <p className="text-sm text-muted-foreground">
-              Enter password reset email below
+              Enter your new password below
             </p>
           </header>
-          <ResetPasswordForm />
+          <RequestPasswordResetForm />
         </div>
       </div>
     </div>
