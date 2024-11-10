@@ -19,6 +19,7 @@ const Parking = () => {
         <h1 className="font-subheading text-2xl font-semibold tracking-tight" style={{marginLeft: 288+'px', marginTop: 50+'px'}}>
           Parking Page
         </h1>
+        <p>Information about available parking belongs on this page.</p>
     </div>
   );
 };
