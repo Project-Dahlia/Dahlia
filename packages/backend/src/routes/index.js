@@ -1,6 +1,8 @@
 const express = require('express');
 const homeRoute = require('./home-route');
 const authRoute = require('./auth-route');
+const parkingSpotsRoute = require('./parking.-spots');
+const healthRoute = require('./health-route');
 const bodyParser = require('body-parser');
 
 const router = express.Router();
@@ -19,6 +21,14 @@ const defaultRoutes = [
   {
     path: '/auth',
     route: authRoute
+  },
+  {
+    path: '/',
+    route: parkingSpotsRoute
+  },
+  {
+    path: '/',
+    route: healthRoute
   }
 ];
 

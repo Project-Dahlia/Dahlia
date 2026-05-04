@@ -14,7 +14,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   ParkingSpots.init(
     {
-      id: DataTypes.STRING,
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
       slug: DataTypes.STRING,
       address: DataTypes.STRING,
       lat: DataTypes.FLOAT,

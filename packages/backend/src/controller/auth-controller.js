@@ -1,3 +1,5 @@
+'use strict';
+
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const httpStatus = require('http-status');
@@ -6,9 +8,12 @@ const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 const moment = require('moment');
 const { Op } = require('sequelize');
+const { OAuth2Client } = require('google-auth-library');
 
 const {
   generateToken,
+  generateRefreshToken,
+  verifyRefreshToken,
   sanitizeUserData
 } = require('../middleware/auth-middleware');
 const responseWrapper = require('../utils/response-wrapper');
@@ -16,25 +21,18 @@ const responseWrapper = require('../utils/response-wrapper');
 // Load environment variables from .env file
 dotenv.config();
 
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
 // Register user
 const register = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    if (!name || !email || !password) {
-      return responseWrapper(
-        res,
-        httpStatus.BAD_REQUEST,
-        {},
-        'All fields are required'
-      );
-    }
-
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return responseWrapper(
         res,
-        httpStatus.BAD_REQUEST,
+        httpStatus.CONFLICT,
         {},
         'Email already in use'
       );
@@ -43,16 +41,20 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, password: hashedPassword });
 
-    // Generate JWT token
     const token = generateToken(user);
+    const refreshToken = generateRefreshToken(user);
 
-    // Sanitize user data
+    // Store hashed refresh token
+    const hashedRefresh = await bcrypt.hash(refreshToken, 10);
+    user.refreshToken = hashedRefresh;
+    await user.save();
+
     const sanitizedUserData = sanitizeUserData(user);
 
     responseWrapper(
       res,
       httpStatus.CREATED,
-      { token, user: sanitizedUserData },
+      { token, refreshToken, user: sanitizedUserData },
       'User created successfully'
     );
   } catch (error) {
@@ -70,15 +72,6 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    if (!email || !password) {
-      return responseWrapper(
-        res,
-        httpStatus.BAD_REQUEST,
-        {},
-        'Email and password are required'
-      );
-    }
-
     const user = await User.findOne({
       where: { email },
       attributes: ['id', 'name', 'email', 'password']
@@ -102,16 +95,19 @@ const login = async (req, res) => {
       );
     }
 
-    // Generate JWT token
     const token = generateToken(user);
+    const refreshToken = generateRefreshToken(user);
 
-    // Sanitize user data
+    const hashedRefresh = await bcrypt.hash(refreshToken, 10);
+    user.refreshToken = hashedRefresh;
+    await user.save();
+
     const sanitizedUserData = sanitizeUserData(user);
 
     responseWrapper(
       res,
       httpStatus.OK,
-      { token, user: sanitizedUserData },
+      { token, refreshToken, user: sanitizedUserData },
       'Login successful'
     );
   } catch (error) {
@@ -124,32 +120,41 @@ const login = async (req, res) => {
   }
 };
 
-//Google login
+//Google login — verifies the ID token with Google before trusting claims
 const googleLogin = async (req, res) => {
-  const { email, name, googleId } = req.body;
+  const { email, name, googleId, idToken } = req.body;
 
   try {
-    if (!email || !googleId) {
+    // Verify the Google ID token
+    let ticket;
+    try {
+      ticket = await googleClient.verifyIdToken({
+        idToken,
+        audience: process.env.GOOGLE_CLIENT_ID
+      });
+    } catch (verifyErr) {
       return responseWrapper(
         res,
-        httpStatus.BAD_REQUEST,
+        httpStatus.UNAUTHORIZED,
         {},
-        'Email and Google ID are required'
+        'Google token verification failed'
+      );
+    }
+
+    const payload = ticket.getPayload();
+    if (payload.sub !== googleId || payload.email !== email) {
+      return responseWrapper(
+        res,
+        httpStatus.UNAUTHORIZED,
+        {},
+        'Token claims do not match provided identity'
       );
     }
 
     let user = await User.findOne({ where: { email } });
 
     if (user) {
-      if (user.googleId === googleId) {
-        const sanitizedUserData = sanitizeUserData(user);
-        return responseWrapper(
-          res,
-          httpStatus.OK,
-          { user: sanitizedUserData },
-          'Login successful'
-        );
-      } else {
+      if (user.googleId && user.googleId !== googleId) {
         return responseWrapper(
           res,
           httpStatus.UNAUTHORIZED,
@@ -157,6 +162,19 @@ const googleLogin = async (req, res) => {
           'Invalid credentials'
         );
       }
+      // Update googleId if first Google login for this email
+      if (!user.googleId) {
+        user.googleId = googleId;
+        await user.save();
+      }
+
+      const sanitizedUserData = sanitizeUserData(user);
+      return responseWrapper(
+        res,
+        httpStatus.OK,
+        { user: sanitizedUserData },
+        'Login successful'
+      );
     } else {
       user = await User.create({ name, email, googleId });
       const sanitizedUserData = sanitizeUserData(user);
@@ -177,6 +195,65 @@ const googleLogin = async (req, res) => {
   }
 };
 
+// Refresh access token using a valid refresh token
+const refreshToken = async (req, res) => {
+  const { refreshToken: token } = req.body;
+  if (!token) {
+    return responseWrapper(
+      res,
+      httpStatus.BAD_REQUEST,
+      {},
+      'Refresh token is required'
+    );
+  }
+
+  try {
+    const decoded = verifyRefreshToken(token);
+
+    const user = await User.findByPk(decoded.userId, {
+      attributes: ['id', 'name', 'email', 'refreshToken']
+    });
+    if (!user || !user.refreshToken) {
+      return responseWrapper(
+        res,
+        httpStatus.UNAUTHORIZED,
+        {},
+        'Invalid refresh token'
+      );
+    }
+
+    const tokenMatches = await bcrypt.compare(token, user.refreshToken);
+    if (!tokenMatches) {
+      return responseWrapper(
+        res,
+        httpStatus.UNAUTHORIZED,
+        {},
+        'Invalid refresh token'
+      );
+    }
+
+    const newAccessToken = generateToken(user);
+    const newRefreshToken = generateRefreshToken(user);
+    const hashedRefresh = await bcrypt.hash(newRefreshToken, 10);
+    user.refreshToken = hashedRefresh;
+    await user.save();
+
+    responseWrapper(
+      res,
+      httpStatus.OK,
+      { token: newAccessToken, refreshToken: newRefreshToken },
+      'Token refreshed'
+    );
+  } catch (error) {
+    responseWrapper(
+      res,
+      httpStatus.UNAUTHORIZED,
+      {},
+      'Invalid or expired refresh token'
+    );
+  }
+};
+
 //Password reset
 const requestPasswordReset = async (req, res) => {
   const { email } = req.body;
@@ -184,11 +261,12 @@ const requestPasswordReset = async (req, res) => {
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
+      // Return success to avoid email enumeration
       return responseWrapper(
         res,
-        httpStatus.NOT_FOUND,
+        httpStatus.OK,
         {},
-        'No user found with that email'
+        'If that email exists, a reset link has been sent.'
       );
     }
 
@@ -207,7 +285,6 @@ const requestPasswordReset = async (req, res) => {
       }
     });
 
-    // Send the email with the reset link
     const resetLink = `${process.env.FRONTEND_URL}/change-password?token=${resetToken}`;
     const mailOptions = {
       to: user.email,
@@ -216,7 +293,6 @@ const requestPasswordReset = async (req, res) => {
       text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
       Please click on the following link, or paste this into your browser to complete the process:\n\n
       ${resetLink}\n\n
-     
       If you did not request this, please ignore this email and your password will remain unchanged.\n`
     };
 
@@ -226,7 +302,7 @@ const requestPasswordReset = async (req, res) => {
       res,
       httpStatus.OK,
       {},
-      'An email has been sent to ' + user.email + ' with further instructions.'
+      'If that email exists, a reset link has been sent.'
     );
   } catch (error) {
     responseWrapper(
@@ -246,7 +322,6 @@ const resetPassword = async (req, res) => {
     const user = await User.findOne({
       where: {
         resetPasswordToken: token,
-
         resetPasswordExpires: { [Op.gte]: moment() }
       }
     });
@@ -259,7 +334,6 @@ const resetPassword = async (req, res) => {
       );
     }
 
-    // Hash the new password
     const hashedPassword = await bcrypt.hash(password, 10);
     user.password = hashedPassword;
     user.resetPasswordToken = null;
@@ -286,6 +360,8 @@ module.exports = {
   register,
   login,
   googleLogin,
+  refreshToken,
   requestPasswordReset,
   resetPassword
 };
+

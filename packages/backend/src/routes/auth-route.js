@@ -1,6 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const rateLimit = require('express-rate-limit');
 const authController = require('../controller/auth-controller');
+const {
+  validate,
+  registerRules,
+  loginRules,
+  resetRequestRules,
+  resetPasswordRules,
+  googleLoginRules
+} = require('../middleware/validation-middleware');
+
+// Strict limiter for write auth operations (10 requests per 15 min per IP)
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many requests, please try again later.' }
+});
 
 /**
  * @swagger
@@ -72,7 +90,7 @@ const authController = require('../controller/auth-controller');
  *       "500":
  *         description: Server Error
  */
-router.post('/register', authController.register);
+router.post('/register', authLimiter, registerRules, validate, authController.register);
 
 /**
  * @swagger
@@ -142,9 +160,9 @@ router.post('/register', authController.register);
  *       "500":
  *         description: Server Error
  */
-router.post('/login', authController.login);
+router.post('/login', authLimiter, loginRules, validate, authController.login);
 
-router.post('/google-login', authController.googleLogin);
+router.post('/google-login', authLimiter, googleLoginRules, validate, authController.googleLogin);
 
 /**
  * @swagger
@@ -185,7 +203,7 @@ router.post('/google-login', authController.googleLogin);
  *       "500":
  *         description: Server Error
  */
-router.post('/request-password-reset', authController.requestPasswordReset);
+router.post('/request-password-reset', authLimiter, resetRequestRules, validate, authController.requestPasswordReset);
 
 /**
  * @swagger
@@ -231,6 +249,8 @@ router.post('/request-password-reset', authController.requestPasswordReset);
  *       "500":
  *         description: Server Error
  */
-router.post('/reset-password', authController.resetPassword);
+router.post('/reset-password', authLimiter, resetPasswordRules, validate, authController.resetPassword);
+
+router.post('/refresh', authController.refreshToken);
 
 module.exports = router;
