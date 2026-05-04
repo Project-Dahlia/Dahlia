@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
-const ParkingSpot = require('../models/load-to-db');
+const db = require('../models');
+const ParkingSpot = db.ParkingSpots;
 const sequelize = require('../config/database');
 
 // Ensure tables are created or updated before seeding data
